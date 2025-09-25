@@ -172,6 +172,65 @@ section {
   white-space: nowrap;
 }
 
+/* -------------------------------
+   Navigation Mobile
+--------------------------------- */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+}
+
+/* -------------------------------
+   Mobile Layout
+--------------------------------- */
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+    text-align: center;
+    display: none; /* versteckt standardmäßig */
+    background-color: #333;
+    padding: 1rem;
+  }
+
+  header nav ul.show {
+    display: flex; /* sichtbar, wenn per JS aktiviert */
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #007acc;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none; /* unsichtbar am Anfang */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: opacity 0.3s;
+}
+
+#backToTop.show {
+  display: block;
+  opacity: 0.9;
+}
+
+
 
 /* -------------------------------
    Responsivität
