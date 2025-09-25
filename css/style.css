@@ -1,4 +1,6 @@
-/* Reset & Grundstil */
+/* -------------------------------
+   Reset & Grundstil
+--------------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +15,9 @@ body {
   padding-top: 60px; /* Platz für Navigation */
 }
 
-/* Header / Navigation */
+/* -------------------------------
+   Header / Navigation
+--------------------------------- */
 header {
   background-color: #333;
   color: white;
@@ -44,7 +48,9 @@ header nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Sektionen */
+/* -------------------------------
+   Allgemeine Sections
+--------------------------------- */
 section {
   max-width: 900px;
   margin: 2rem auto;
@@ -54,7 +60,9 @@ section {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Hero */
+/* -------------------------------
+   Hero
+--------------------------------- */
 #hero {
   text-align: center;
   background-color: #e0f7fa;
@@ -62,29 +70,9 @@ section {
   border-radius: 8px;
 }
 
-/* Mobile Navigation */
-@media (max-width: 768px) {
-  header nav ul {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  header nav ul li {
-    margin: 0.5rem 0;
-  }
-}
-
-.project-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.project {
-  flex: 1 1 300px; /* wächst, schrumpft, min. 300px */
-}
-
-/* Projekte-Layout */
+/* -------------------------------
+   Projekte
+--------------------------------- */
 .project-list {
   display: flex;
   flex-wrap: wrap;
@@ -128,4 +116,60 @@ section {
 
 .project a:hover {
   background: #005b99;
+}
+
+/* -------------------------------
+   About Section
+--------------------------------- */
+#about {
+  margin: 3rem 0;
+}
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.about-text {
+  flex: 1;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skills-list li {
+  background: #007acc;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* -------------------------------
+   Responsivität
+--------------------------------- */
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header nav ul li {
+    margin: 0.5rem 0;
+  }
 }
