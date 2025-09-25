@@ -61,3 +61,25 @@ section {
   padding: 4rem 1rem;
   border-radius: 8px;
 }
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header nav ul li {
+    margin: 0.5rem 0;
+  }
+}
+
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.project {
+  flex: 1 1 300px; /* wächst, schrumpft, min. 300px */
+}
