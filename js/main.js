@@ -14,6 +14,11 @@ const projects = [
     name: "Projekt 3",
     description: "Kurze Beschreibung von Projekt 3",
     link: "#"
+  },
+    {
+    name: "Projekt 4",
+    description: "Kurze Beschreibung von Projekt 4",
+    link: "#"
   }
 ];
 

@@ -83,3 +83,49 @@ section {
 .project {
   flex: 1 1 300px; /* wächst, schrumpft, min. 300px */
 }
+
+/* Projekte-Layout */
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.project {
+  flex: 1 1 300px;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.project h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.project p {
+  margin: 0.5rem 0 1rem;
+  color: #555;
+}
+
+.project a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #007acc;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.project a:hover {
+  background: #005b99;
+}
