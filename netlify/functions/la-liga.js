@@ -1,11 +1,13 @@
-
 export async function handler(event, context) {
   const apiKey = process.env.API_FOOTBALL_KEY; 
-  const url = "https://v3.football.api-sports.io/standings?season=2025&league=140";
+  const url = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2025&league=140";
 
   try {
     const response = await fetch(url, {
-      headers: { "X-Auth-Token": apiKey }
+      headers: {
+        "X-RapidAPI-Key": apiKey,
+        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
+      }
     });
     const data = await response.json();
 
