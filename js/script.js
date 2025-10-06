@@ -59,10 +59,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP Fehler ${res.status}`);
-    
+
     const data = await res.json();
     console.log("Live-Daten:", data); // Debug
-    
+
     if (!data.response || !data.response[0]?.league?.standings) {
       throw new Error("Ungültige Datenstruktur von der Function");
     }
