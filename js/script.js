@@ -49,39 +49,41 @@ projects.forEach(proj => {
 });
 
 // ==========================
-// Live La Liga Integration
+// Live La Liga Integration via Netlify Function
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
-  const apiKey = "77c6a6872474a921064d3d21c5c264d2"; 
-  const url = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2025&league=140"; // La Liga
+  
+  const url = "/.netlify/functions/la-liga"; // Serverless Function
 
-  fetch(url, {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": apiKey,
-      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
-    }
-  })
-  .then(res => res.json())
-  .then(data => {
-    const standings = data.response[0].league.standings[0];
-    const tbody = document.querySelector("#la-liga-table tbody");
-    tbody.innerHTML = "";
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data); // Debug: prüfen ob Daten kommen
+      const standings = data.response[0].league.standings[0];
 
-    standings.forEach((team, i) => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${i+1}</td><td>${team.team.name}</td><td>${team.points}</td>`;
+      const tbody = document.querySelector("#la-liga-table tbody");
+      tbody.innerHTML = "";
 
-      if(team.team.name.toLowerCase().includes("barcelona")){
-        tr.classList.add("highlight");
-        document.getElementById("barcelona-match").textContent = `FC Barcelona aktuell: ${team.points} Punkte`;
+      standings.forEach((team, i) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${i+1}</td><td>${team.team.name}</td><td>${team.points}</td>`;
+
+        if (team.team.name.toLowerCase().includes("barcelona")) {
+          tr.classList.add("highlight");
+          const barcaElem = document.getElementById("barcelona-match");
+          if (barcaElem) {
+            barcaElem.textContent = `FC Barcelona aktuell: ${team.points} Punkte`;
+          }
+        }
+
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      const barcaElem = document.getElementById("barcelona-match");
+      if (barcaElem) {
+        barcaElem.textContent = "Live-Daten nicht verfügbar.";
       }
-
-      tbody.appendChild(tr);
     });
-  })
-  .catch(err => {
-    console.error(err);
-    document.getElementById("barcelona-match").textContent = "Live-Daten nicht verfügbar.";
-  });
 });
