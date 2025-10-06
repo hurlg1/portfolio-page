@@ -89,22 +89,79 @@ section {
   box-shadow: var(--shadow);
 }
 
-/* Hero Section */
+/* Hero Splash Section Fullscreen */
 #hero {
-  background: var(--clr-accent);
+  width: 100%;
+  min-height: 100vh; /* Voller Viewport */
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 5rem 1rem;
-  border-radius: var(--radius);
+  color: white;
+  position: relative;
+  background: linear-gradient(135deg, #007acc, #00aaff); /* Blau-Gradient */
+  overflow: hidden;
 }
 
-#hero h1 {
-  font-size: 2rem;
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25); /* leichter Overlay für besseren Kontrast */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2; /* sicherstellen, dass Text über Overlay liegt */
+  padding: 0 1rem;
+}
+
+.hero-content h1 {
+  font-size: 4vw; /* responsive Größe */
   margin-bottom: 1rem;
+  font-weight: 700;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
 }
 
-#hero p {
-  font-size: 1.1rem;
+.hero-content p {
+  font-size: 1.5vw;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1.3s ease forwards;
+  opacity: 0;
 }
+
+.cta-btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007acc;
+  background: white;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  animation: fadeInUp 1.6s ease forwards;
+  opacity: 0;
+}
+
+.cta-btn:hover {
+  background: #e0f7fa;
+  transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+
 
 /* About Section */
 #about {
