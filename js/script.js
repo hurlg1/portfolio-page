@@ -52,7 +52,7 @@ projects.forEach(proj => {
 // Live La Liga Integration via Netlify Function
 // ==========================
 document.addEventListener("DOMContentLoaded", async () => {
-  const url = "/.netlify/functions/la-liga"; // Serverless Function
+  const url = "https://wonderful-cuchufli-cca935.netlify.app/.netlify/functions/la-liga";
   const barcaElem = document.getElementById("barcelona-match");
   const tbody = document.querySelector("#la-liga-table tbody");
 
