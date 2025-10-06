@@ -2,16 +2,17 @@
    Variablen & Grundstil
 ----------------------------------- */
 :root {
-  --clr-bg: #f9fafb;
-  --clr-surface: #ffffff;
-  --clr-text: #1f2937;
-  --clr-primary: #007acc;
-  --clr-primary-dark: #005b99;
-  --clr-accent: #e0f7fa;
+  --clr-bg: #f0f4f8;             /* helles Pastellblau für Hintergrund */
+  --clr-surface: #ffffff;        /* weisse Oberflächen/Karten */
+  --clr-text: #1e293b;           /* dunkles Blau für Text */
+  --clr-primary: #2196f3;        /* kräftiges Blau für Buttons / Links */
+  --clr-primary-dark: #64b5f6;   /* helleres Blau für Hover oder Akzente */
+  --clr-accent: #64b5f6;         /* leichte Akzentfarbe für Hero-Sektion */
   --radius: 10px;
   --shadow: 0 2px 8px rgba(0,0,0,0.08);
   --max-width: 900px;
 }
+
 
 * {
   margin: 0;
