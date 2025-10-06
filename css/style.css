@@ -1,6 +1,18 @@
-/* -------------------------------
-   Reset & Grundstil
---------------------------------- */
+/* -----------------------------------
+   Variablen & Grundstil
+----------------------------------- */
+:root {
+  --clr-bg: #f9fafb;
+  --clr-surface: #ffffff;
+  --clr-text: #1f2937;
+  --clr-primary: #007acc;
+  --clr-primary-dark: #005b99;
+  --clr-accent: #e0f7fa;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --max-width: 900px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,211 +20,171 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-text);
   line-height: 1.6;
-  background-color: #f9f9f9;
-  color: #333;
-  padding-top: 60px; /* Platz für Navigation */
+  padding-top: 70px;
 }
 
-/* -------------------------------
+/* -----------------------------------
    Header / Navigation
---------------------------------- */
+----------------------------------- */
 header {
-  background-color: #333;
+  background: var(--clr-text);
   color: white;
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 1rem 0;
   z-index: 1000;
+  box-shadow: var(--shadow);
 }
 
-header nav ul {
+header .container {
+  max-width: var(--max-width);
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+}
+
+nav ul {
   list-style: none;
-}
-
-header nav ul li {
-  margin: 0 1rem;
-}
-
-header nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-header nav ul li a:hover {
-  text-decoration: underline;
-}
-
-/* -------------------------------
-   Allgemeine Sections
---------------------------------- */
-section {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2rem 1rem;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* -------------------------------
-   Hero
---------------------------------- */
-#hero {
-  text-align: center;
-  background-color: #e0f7fa;
-  padding: 4rem 1rem;
-  border-radius: 8px;
-}
-
-/* -------------------------------
-   Projekte
---------------------------------- */
-.project-list {
   display: flex;
-  flex-wrap: wrap;
   gap: 1.5rem;
-  margin-top: 1rem;
 }
 
-.project {
-  flex: 1 1 300px;
-  background: #f9f9f9;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.project:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.project h3 {
-  margin-top: 0;
-  color: #333;
-}
-
-.project p {
-  margin: 0.5rem 0 1rem;
-  color: #555;
-}
-
-.project a {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: #007acc;
+nav a {
   color: white;
   text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
+  font-weight: 600;
+  transition: opacity 0.2s;
 }
 
-.project a:hover {
-  background: #005b99;
+nav a:hover {
+  opacity: 0.7;
 }
 
-/* -------------------------------
-   About Section
---------------------------------- */
-#about {
-  margin: 3rem auto;
-}
-
-.about-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 2rem;
-}
-
-.profile-pic {
-  flex: 0 0 180px;       /* fixierte Breite */
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.about-text {
-  flex: 1;
-  min-width: 250px;
-}
-
-.about-text h2 {
-  margin-bottom: 1rem;
-}
-
-.about-text p {
-  margin-bottom: 1.5rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-.skills-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.skills-list li {
-  background: #007acc;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-
-/* -------------------------------
-   Navigation Mobile
---------------------------------- */
+/* Mobile Toggle */
 .nav-toggle {
   display: none;
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: white;
   cursor: pointer;
-  position: absolute;
-  top: 0.8rem;
-  right: 1rem;
 }
 
-/* -------------------------------
-   Mobile Layout
---------------------------------- */
-@media (max-width: 768px) {
-  header nav ul {
-    flex-direction: column;
-    text-align: center;
-    display: none; /* versteckt standardmäßig */
-    background-color: #333;
-    padding: 1rem;
-  }
-
-  header nav ul.show {
-    display: flex; /* sichtbar, wenn per JS aktiviert */
-  }
-
-  .nav-toggle {
-    display: block;
-  }
+/* -----------------------------------
+   Sektionen
+----------------------------------- */
+section {
+  max-width: var(--max-width);
+  margin: 3rem auto;
+  padding: 2rem 1.5rem;
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
+/* -----------------------------------
+   Hero Section
+----------------------------------- */
+#hero {
+  background: var(--clr-accent);
+  text-align: center;
+  padding: 5rem 1rem;
+  border-radius: var(--radius);
+}
+
+#hero h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+#hero p {
+  font-size: 1.1rem;
+}
+
+/* -----------------------------------
+   About Section
+----------------------------------- */
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+.profile-pic {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+}
+
+.skills-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skills-list li {
+  background: var(--clr-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* -----------------------------------
+   Projekte
+----------------------------------- */
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.project {
+  flex: 1 1 300px;
+  background: var(--clr-bg);
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* -----------------------------------
+   Footer
+----------------------------------- */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* -----------------------------------
+   Back-to-Top Button
+----------------------------------- */
 #backToTop {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #007acc;
+  background: var(--clr-primary);
   color: white;
   border: none;
   border-radius: 50%;
@@ -220,9 +192,9 @@ section {
   height: 45px;
   font-size: 1.5rem;
   cursor: pointer;
-  display: none; /* unsichtbar am Anfang */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: opacity 0.3s;
+  display: none;
+  box-shadow: var(--shadow);
+  transition: opacity 0.3s, transform 0.3s;
 }
 
 #backToTop.show {
@@ -230,18 +202,34 @@ section {
   opacity: 0.9;
 }
 
+#backToTop:hover {
+  transform: translateY(-3px);
+}
 
-
-/* -------------------------------
-   Responsivität
---------------------------------- */
+/* -----------------------------------
+   Mobile Layout
+----------------------------------- */
 @media (max-width: 768px) {
-  header nav ul {
+  nav ul {
     flex-direction: column;
-    text-align: center;
+    background: var(--clr-text);
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    display: none;
+    padding: 1rem 0;
   }
 
-  header nav ul li {
-    margin: 0.5rem 0;
+  nav ul.show {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  section {
+    margin: 2rem 1rem;
   }
 }
