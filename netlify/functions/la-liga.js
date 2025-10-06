@@ -1,4 +1,3 @@
-import fetch from "node-fetch"; // für HTTP Requests
 
 export async function handler(event, context) {
   const apiKey = process.env.API_FOOTBALL_KEY; 
