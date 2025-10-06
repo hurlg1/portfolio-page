@@ -107,6 +107,29 @@ section {
   font-size: 1.1rem;
 }
 
+#live-football {
+  background: rgba(0,122,204,0.08);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#la-liga-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#la-liga-table th, #la-liga-table td {
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+#la-liga-table tbody tr.highlight {
+  background: rgba(0,122,204,0.2); /* Barcelona hervorheben */
+}
+
 /* ---- About Section ---- */
 #about { margin: 3rem auto; }
 
