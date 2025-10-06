@@ -5,97 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Portfolio - Gian-Luca</title>
 
-  <!-- Fonts & Styles -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <!-- Header / Navigation -->
   <header>
-    <div class="container">
-      <a href="#hero" class="logo">Gian-Luca</a>
-      <button class="nav-toggle" aria-label="Menü">☰</button>
-      <nav>
-        <ul>
-          <li><a href="#about">Über mich</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projekte</a></li>
-          <li><a href="#contact">Kontakt</a></li>
-        </ul>
-      </nav>
-    </div>
+    <a href="#hero" class="logo">Gian-Luca</a>
+    <button class="nav-toggle" aria-label="Menü">☰</button>
+    <nav>
+      <ul>
+        <li><a href="#about">Über mich</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projekte</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- Fullscreen Hero / Splash Page -->
-  <main>
-    <section id="hero">
-      <div class="hero-content">
-        <h1>vallah sogar</h1>
-        <p>Portfolio</p>
-        <a href="#about" class="cta-btn">Mehr erfahren</a>
-      </div>
-    </section>
+  <!-- Fullscreen Splash / Hero -->
+ <section id="hero">
+  <div class="hero-content">
+    <h1>Gian-Luca Hürlimann</h1>
+    <p>Digital Business & AI Student</p>
+    <a href="#about" class="btn-primary">Mehr erfahren</a>
+  </div>
+</section>
 
-    <!-- About Section -->
+
+  <!-- Content Sections -->
+  <main>
     <section id="about">
       <h2>Über mich</h2>
       <div class="about-grid">
         <figure class="profile">
           <img src="img/profile.jpg" alt="Mein Foto" class="profile-pic">
-          <figcaption class="profile-name">
-            Gian-Luca Hürlimann
+          <figcaption>
+            <strong>Gian-Luca Hürlimann</strong>
             <div class="muted">Digital Business &amp; AI (BFH)</div>
           </figcaption>
         </figure>
-
         <div class="about-content">
           <p>Hi 😊 Ich bin Gian-Luca, Student an der BFH und versuche aktuell das Modul EWEB zu meistern. 
-             Auch wenn vieles für mich neu ist, begeistert mich dieses Thema sehr. 
-             Besonders spannend finde ich Bereiche wie Frontend-Design, moderne Frameworks und APIs.</p>
-
-          <ul class="profile-meta">
-            <li><strong>Studium:</strong> Digital Business &amp; AI (BFH)</li>
-            <li><strong>Hobbys:</strong> Laufen, Fussball, Gamen</li>
-            <li><strong>Essen:</strong> Pasta, Pizza, Tiramisu</li>
-          </ul>
+          Besonders spannend finde ich Bereiche wie Frontend-Design, moderne Frameworks und APIs.</p>
         </div>
       </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills">
       <h2>Skills</h2>
       <ul class="skills-list">
-        <li>ja</li>
-        <li>was</li>
-        <li>kann</li>
-        <li>ich</li>
+        <li>HTML</li><li>CSS</li><li>JS</li><li>Design</li>
       </ul>
     </section>
 
-    <!-- Projekte Section -->
     <section id="projects">
       <h2>Projekte</h2>
       <div class="project-list"></div>
     </section>
 
-    <!-- Kontakt Section -->
     <section id="contact">
       <h2>Kontakt</h2>
       <p>E-Mail: <a href="mailto:gehtdich@nix.an">gehtdich@nix.an</a></p>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Gian-Luca Hürlimann</p>
   </footer>
 
-  <!-- Back to Top -->
   <button id="backToTop" aria-label="Nach oben">↑</button>
 
-  <!-- JS -->
   <script src="js/script.js"></script>
 </body>
 </html>
