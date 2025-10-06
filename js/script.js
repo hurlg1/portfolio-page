@@ -52,7 +52,7 @@ projects.forEach(proj => {
 // Live La Liga Integration
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
-  const apiKey = "DEIN_API_KEY_HIER"; // <--- hier deinen RapidAPI-Key einsetzen
+  const apiKey = "77c6a6872474a921064d3d21c5c264d2"; 
   const url = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2025&league=140"; // La Liga
 
   fetch(url, {
