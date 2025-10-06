@@ -57,15 +57,16 @@ nav ul {
 }
 
 nav a {
-  color: white;
+  color: var(--clr-primary);
   text-decoration: none;
   font-weight: 600;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, color 0.2s;
 }
 
 nav a:hover {
-  opacity: 0.7;
+  color: var(--clr-primary-dark); /* helleres Blau beim Hover */
 }
+
 
 .nav-toggle {
   display: none;
