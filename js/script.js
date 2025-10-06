@@ -1,12 +1,13 @@
 // ==========================
 // Navigation Toggle
 // ==========================
-const navToggle = document.querySelector(".nav-toggle");
-const navMenu = document.querySelector("header nav ul");
+const navToggle = document.querySelector('.nav-toggle');
+const navTop = document.querySelector('.nav-top');
 
-navToggle.addEventListener("click", () => {
-  navMenu.classList.toggle("show");
+navToggle.addEventListener('click', () => {
+  navTop.classList.toggle('show');
 });
+
 
 // ==========================
 // Back to Top Button
