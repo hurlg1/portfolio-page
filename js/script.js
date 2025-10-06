@@ -51,39 +51,42 @@ projects.forEach(proj => {
 // ==========================
 // Live La Liga Integration via Netlify Function
 // ==========================
-document.addEventListener("DOMContentLoaded", () => {
-  
+document.addEventListener("DOMContentLoaded", async () => {
   const url = "/.netlify/functions/la-liga"; // Serverless Function
+  const barcaElem = document.getElementById("barcelona-match");
+  const tbody = document.querySelector("#la-liga-table tbody");
 
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data); // Debug: prüfen ob Daten kommen
-      const standings = data.response[0].league.standings[0];
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP Fehler ${res.status}`);
+    
+    const data = await res.json();
+    console.log("Live-Daten:", data); // Debug
+    
+    if (!data.response || !data.response[0]?.league?.standings) {
+      throw new Error("Ungültige Datenstruktur von der Function");
+    }
 
-      const tbody = document.querySelector("#la-liga-table tbody");
-      tbody.innerHTML = "";
+    const standings = data.response[0].league.standings[0];
+    tbody.innerHTML = "";
 
-      standings.forEach((team, i) => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td>${i+1}</td><td>${team.team.name}</td><td>${team.points}</td>`;
+    standings.forEach((team, i) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${i+1}</td><td>${team.team.name}</td><td>${team.points}</td>`;
 
-        if (team.team.name.toLowerCase().includes("barcelona")) {
-          tr.classList.add("highlight");
-          const barcaElem = document.getElementById("barcelona-match");
-          if (barcaElem) {
-            barcaElem.textContent = `FC Barcelona aktuell: ${team.points} Punkte`;
-          }
+      if (team.team.name.toLowerCase().includes("barcelona")) {
+        tr.classList.add("highlight");
+        if (barcaElem) {
+          barcaElem.textContent = `FC Barcelona aktuell: ${team.points} Punkte`;
         }
-
-        tbody.appendChild(tr);
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      const barcaElem = document.getElementById("barcelona-match");
-      if (barcaElem) {
-        barcaElem.textContent = "Live-Daten nicht verfügbar.";
       }
+
+      tbody.appendChild(tr);
     });
+
+  } catch (err) {
+    console.error("Fehler beim Laden der La Liga Daten:", err);
+    if (barcaElem) barcaElem.textContent = "Live-Daten nicht verfügbar.";
+    tbody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der Tabelle</td></tr>`;
+  }
 });
