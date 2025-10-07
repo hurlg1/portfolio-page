@@ -41,34 +41,29 @@ backToTop.addEventListener("click", () => {
 });
 
 // ==========================
-// projekte dynamisch einfügen
+// caching helper function
 // ==========================
-const projects = [
+function cacheData(key, defaultData) {
+  const cached = localStorage.getItem(key);
+  if (cached) return JSON.parse(cached);
+  localStorage.setItem(key, JSON.stringify(defaultData));
+  return defaultData;
+}
+
+// ==========================
+// projekte dynamisch einfügen + caching
+// ==========================
+const projectList = document.querySelector(".project-list");
+const cachedProjects = cacheData('projects', [
   { name: "Projekt 1", description: "Kurze Beschreibung von Projekt 1", link: "#", media: '<img src="img/beach.jpg" alt="Projekt 1">' },
   { name: "Projekt 2", description: "Kurze Beschreibung von Projekt 2", link: "#" },
   { name: "Projekt 3", description: "Kurze Beschreibung von Projekt 3", link: "#" },
   { name: "Projekt 4", description: "Kurze Beschreibung von Projekt 4", link: "#" }
-];
+]);
 
-const projectList = document.querySelector(".project-list");
-
-projects.forEach(({ name, description, link, media }) => {
-  const article = document.createElement("article");
-  article.classList.add("project");
-  article.innerHTML = `
-    ${media ? `<div class="project-media">${media}</div>` : `<div class="project-media"></div>`}
-    <h3>${name}</h3>
-    <p>${description}</p>
-    <a href="${link}" target="_blank">Repo / Demo</a>
-  `;
-  projectList.appendChild(article);
-});
-
-// ==========================
-// sichtbarkeits-animation für projekte
-// ==========================
+// intersection observer für projekte
 const observer = new IntersectionObserver(
-  (entries, observer) => {
+  (entries) => {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
         setTimeout(() => {
@@ -81,8 +76,40 @@ const observer = new IntersectionObserver(
   { threshold: 0.2 }
 );
 
-document.querySelectorAll('.project').forEach((proj) => {
-  observer.observe(proj);
+function renderProjects(projects) {
+  projectList.innerHTML = ''; // vorher löschen
+  projects.forEach(({ name, description, link, media }) => {
+    const article = document.createElement("article");
+    article.classList.add("project");
+    article.innerHTML = `
+      ${media ? `<div class="project-media">${media}</div>` : `<div class="project-media"></div>`}
+      <h3>${name}</h3>
+      <p>${description}</p>
+      <a href="${link}" target="_blank">Repo / Demo</a>
+    `;
+    projectList.appendChild(article);
+    observer.observe(article);
+  });
+}
+
+renderProjects(cachedProjects);
+
+// ==========================
+// about + skills caching
+// ==========================
+const aboutContentEl = document.querySelector('#about .about-content p');
+const skillsListEl = document.querySelector('#skills .skills-list');
+
+const aboutContent = cacheData('aboutContent', aboutContentEl.textContent);
+const skills = cacheData('skills', Array.from(skillsListEl.querySelectorAll('li')).map(li => li.textContent));
+
+aboutContentEl.textContent = aboutContent;
+
+skillsListEl.innerHTML = '';
+skills.forEach(skill => {
+  const li = document.createElement('li');
+  li.textContent = skill;
+  skillsListEl.appendChild(li);
 });
 
 // ==========================
@@ -100,20 +127,20 @@ window.addEventListener("scroll", () => {
     header.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");
+    header.classList.remove("hide"); // ganz oben wieder sichtbar
+    scrollDownCount = 0; // zurücksetzen
   }
 
-  // runterscrollen zählt, hochscrollen zeigt header wieder
+  // nur nach unten scrollen zählt
   if (currentY > lastScrollY) {
     scrollDownCount++;
-  } else {
-    scrollDownCount = 0;
-    header.classList.remove("hide");
   }
 
-  // nach etwa 4 scrollbewegungen (600–800px)
+  // nach etwa 4 scrollbewegungen (ca. 600–800px)
   if (scrollDownCount > 4 && currentY > 400) {
-    header.classList.add("hide");
+    header.classList.add("hide"); // header verschwindet
   }
 
   lastScrollY = currentY;
 });
+
