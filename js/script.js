@@ -83,3 +83,35 @@ document.querySelectorAll('.project').forEach((proj) => {
   observer.observe(proj);
 });
 
+// header 
+
+const header = document.querySelector(".header");
+let lastScrollY = window.scrollY;
+let scrollDownCount = 0; // Zählt "Runterscroll"-Bewegungen
+
+window.addEventListener("scroll", () => {
+  const currentY = window.scrollY;
+
+  // Linie einblenden nach 50px
+  if (currentY > 50) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+
+  // Wenn nach unten gescrollt wird → zähle Bewegungen
+  if (currentY > lastScrollY) {
+    scrollDownCount++;
+  } else {
+    scrollDownCount = 0; // Beim Hochscrollen zurücksetzen
+    header.classList.remove("hide");
+  }
+
+  // Nach ca. 4 Scrollbewegungen (~600–800 px)
+  if (scrollDownCount > 4 && currentY > 400) {
+    header.classList.add("hide");
+  }
+
+  lastScrollY = currentY;
+});
+

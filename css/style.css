@@ -36,14 +36,39 @@ body {
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: center; /* Zentriert den Nav-Inhalt */
+  justify-content: center;
   align-items: center;
   padding: 1rem 2rem;
   z-index: 1000;
   background: transparent;
+  transition: transform 0.4s ease;
 }
 
-/* Logo bleibt links fixiert */
+/* feine Linie */
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6); /* oder var(--clr-primary) */
+  transform: translateX(-50%);
+  transition: width 0.6s ease;
+}
+
+/* Linie sichtbar */
+.header.scrolled::after {
+  width: 90%;
+}
+
+/* Header versteckt */
+.header.hide {
+  transform: translateY(-100%);
+}
+
+
+/* logo fix */
 .logo {
   position: absolute;
   left: 2rem;
