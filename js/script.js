@@ -62,3 +62,24 @@ projects.forEach(({ name, description, link, media }) => {
   `;
   projectList.appendChild(article);
 });
+
+// Sichtbarkeits-Animation für Projekte
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // kleine Verzögerung pro Karte für sanften Stagger-Effekt
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 120);
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
+
+document.querySelectorAll('.project').forEach((proj) => {
+  observer.observe(proj);
+});
+
