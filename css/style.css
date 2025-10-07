@@ -151,6 +151,30 @@ section {
   margin-bottom:2rem;
   box-shadow: var(--shadow);
 }
+.card {
+  background: var(--clr-surface);
+  padding: 2rem;              /* kompakter als der rest der section */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.section-accent {
+  position: relative;
+  overflow: visible;
+}
+.section-accent::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(80px, 15%, 160px);
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light));
+  box-shadow: 0 4px 10px rgba(33,150,243,0.12);
+  opacity: 0.95;
+  z-index: 2;
+}
 h2 {
   font-family: var(--font-heading);
   margin-bottom:1.5rem;
