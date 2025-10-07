@@ -43,7 +43,7 @@ backToTop.addEventListener("click", () => {
 // Projekte dynamisch einfügen
 // ==========================
 const projects = [
-  { name: "Projekt 1", description: "Kurze Beschreibung von Projekt 1", link: "#" },
+  { name: "Projekt 1", description: "Kurze Beschreibung von Projekt 1", link: "#", media: '<img src="img/beach.jpg" alt="Projekt 1">'},
   { name: "Projekt 2", description: "Kurze Beschreibung von Projekt 2", link: "#" },
   { name: "Projekt 3", description: "Kurze Beschreibung von Projekt 3", link: "#" },
   { name: "Projekt 4", description: "Kurze Beschreibung von Projekt 4", link: "#" }
@@ -51,10 +51,11 @@ const projects = [
 
 const projectList = document.querySelector(".project-list");
 
-projects.forEach(({ name, description, link }) => {
+projects.forEach(({ name, description, link, media }) => {
   const article = document.createElement("article");
   article.classList.add("project");
   article.innerHTML = `
+    ${media ? `<div class="project-media">${media}</div>` : `<div class="project-media"></div>`}
     <h3>${name}</h3>
     <p>${description}</p>
     <a href="${link}" target="_blank">Repo / Demo</a>
