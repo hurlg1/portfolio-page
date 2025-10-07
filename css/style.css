@@ -364,7 +364,7 @@ footer {
 }
 
 /* ===============================
-   SMOOTH MOBILE NAVIGATION
+   SMOOTH MOBILE NAVIGATION + SCROLL EFFECTS
 =============================== */
 .nav-toggle {
   display: none; /* Nur im Mobile sichtbar */
@@ -376,29 +376,44 @@ footer {
   z-index: 1200;
   position: absolute;
   right: 2rem;
-  transition: transform 0.3s ease;
+  transition: 
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 
+/* 90 grad nach klick */
 .nav-toggle.active {
   transform: rotate(90deg);
 }
 
+/* farbwechsel beim scrollen */
+.header.scrolled .nav-toggle {
+  color: var(--clr-primary);
+}
+
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
+  /* keine header linie*/
+  .header::after {
+    display: none;
+  }
+
   /* burger sichtbar */
   .nav-toggle {
     display: block;
   }
+
   .about-grid {
-    grid-template-columns: 1fr; /* bild + Text untereinander */
-    text-align: center;          /* zentrierung für mobile */
+    grid-template-columns: 1fr; /* bild + text untereinander */
+    text-align: center;
     gap: 1rem;
   }
 
   .about-content {
-    padding: 0 1rem; /* etwas abstand links/rechts */
+    padding: 0 1rem;
   }
 
-  /* Mobile Menü */
+  /* mobile menü */
   nav ul {
     position: fixed;
     inset: 0;
@@ -435,8 +450,8 @@ footer {
   }
 }
 
+/* ===== DESKTOP ===== */
 @media (min-width: 769px) {
-  /* Desktop: Menü bleibt sichtbar, Burger verschwindet */
   nav ul {
     opacity: 1 !important;
     transform: none !important;

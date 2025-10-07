@@ -1,5 +1,5 @@
 // ==========================
-// Navigation Toggle
+// navigation toggle
 // ==========================
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('nav ul');
@@ -10,7 +10,7 @@ navToggle.addEventListener('click', () => {
   navMenu.classList.toggle('show');
 });
 
-// Menü schließen, wenn Link geklickt wird
+// menü schließen, wenn link geklickt wird
 navLinks.forEach(link =>
   link.addEventListener('click', () => {
     navMenu.classList.remove('show');
@@ -18,15 +18,16 @@ navLinks.forEach(link =>
   })
 );
 
-// Menü-Reset beim Resize (verhindert Aufpoppen)
+// menü-reset beim resize (verhindert aufpoppen)
 window.addEventListener('resize', () => {
   if (window.innerWidth > 768) {
     navMenu.classList.remove('show');
     navToggle.classList.remove('active');
   }
 });
+
 // ==========================
-// Back to Top Button
+// back to top button
 // ==========================
 const backToTop = document.getElementById("backToTop");
 const SCROLL_TRIGGER = 300;
@@ -40,10 +41,10 @@ backToTop.addEventListener("click", () => {
 });
 
 // ==========================
-// Projekte dynamisch einfügen
+// projekte dynamisch einfügen
 // ==========================
 const projects = [
-  { name: "Projekt 1", description: "Kurze Beschreibung von Projekt 1", link: "#", media: '<img src="img/beach.jpg" alt="Projekt 1">'},
+  { name: "Projekt 1", description: "Kurze Beschreibung von Projekt 1", link: "#", media: '<img src="img/beach.jpg" alt="Projekt 1">' },
   { name: "Projekt 2", description: "Kurze Beschreibung von Projekt 2", link: "#" },
   { name: "Projekt 3", description: "Kurze Beschreibung von Projekt 3", link: "#" },
   { name: "Projekt 4", description: "Kurze Beschreibung von Projekt 4", link: "#" }
@@ -63,12 +64,13 @@ projects.forEach(({ name, description, link, media }) => {
   projectList.appendChild(article);
 });
 
-// Sichtbarkeits-Animation für Projekte
+// ==========================
+// sichtbarkeits-animation für projekte
+// ==========================
 const observer = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
-        // kleine Verzögerung pro Karte für sanften Stagger-Effekt
         setTimeout(() => {
           entry.target.classList.add('visible');
         }, index * 120);
@@ -83,35 +85,35 @@ document.querySelectorAll('.project').forEach((proj) => {
   observer.observe(proj);
 });
 
-// header 
-
+// ==========================
+// header scroll behavior
+// ==========================
 const header = document.querySelector(".header");
 let lastScrollY = window.scrollY;
-let scrollDownCount = 0; // Zählt "Runterscroll"-Bewegungen
+let scrollDownCount = 0;
 
 window.addEventListener("scroll", () => {
   const currentY = window.scrollY;
 
-  // Linie einblenden nach 50px
+  // linie aktivieren nach 50px scroll
   if (currentY > 50) {
     header.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");
   }
 
-  // Wenn nach unten gescrollt wird → zähle Bewegungen
+  // runterscrollen zählt, hochscrollen zeigt header wieder
   if (currentY > lastScrollY) {
     scrollDownCount++;
   } else {
-    scrollDownCount = 0; // Beim Hochscrollen zurücksetzen
+    scrollDownCount = 0;
     header.classList.remove("hide");
   }
 
-  // Nach ca. 4 Scrollbewegungen (~600–800 px)
+  // nach etwa 4 scrollbewegungen (600–800px)
   if (scrollDownCount > 4 && currentY > 400) {
     header.classList.add("hide");
   }
 
   lastScrollY = currentY;
 });
-
