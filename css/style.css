@@ -237,7 +237,7 @@ h2 {
   width: 100%;
 }
 
-/* Grundlayout & Animation */
+/* grundlayout & animation */
 .project {
   background-color: var(--clr-surface);
   padding: 1.5rem;
@@ -248,19 +248,19 @@ h2 {
   transform: translateY(20px);
 }
 
-/* Wenn sichtbar */
+/* wenn sichtbar */
 .project.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Hover-Effekt nur Desktop */
+/* hover-effekt nur desktop */
 .project:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* Media-Bereich */
+/* media */
 .project-media {
   width: 100%;
   aspect-ratio: 16 / 9; /* bleibt responsiv */
@@ -268,6 +268,7 @@ h2 {
   background: #e3f2fd;
   margin-bottom: 1rem;
   overflow: hidden;
+  position:relative;
 }
 
 .project-media img,
@@ -276,9 +277,16 @@ h2 {
   height: 100%;
   object-fit: cover;
   display: block;
+  transform: scale(1);
+  transition: transform 1.2s ease;
 }
 
-/* Text */
+.project.visible .project-media img,
+.project.visible .project-media video {
+  transform: scale(1.05);
+}
+
+/* text */
 .project h3 {
   font-family: var(--font-heading);
   font-size: 1.25rem;
@@ -319,10 +327,12 @@ footer {
   box-shadow: var(--shadow);
   transition: all 0.3s ease;
 }
+
 #backToTop.show {
   opacity:0.9;
   pointer-events:auto;
 }
+
 #backToTop:hover {
   background: var(--clr-primary-light);
   transform: translateY(-3px);
