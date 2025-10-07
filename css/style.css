@@ -213,13 +213,20 @@ h2 {
   padding:0;
 }
 .skills-list li {
-  padding:0.4rem 0.8rem;
-  border-radius:999px;
-  background: rgba(0,122,204,0.12);
+  padding: 0.5rem 0.8rem;
+  border-radius: 12px; /* leicht abgerundet */
+  background: rgba(33,150,243,0.12); /* sanfter Hintergrund */
   color: var(--clr-primary);
-  font-weight:600;
-  font-size:0.85rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s ease;
 }
+
+.skills-list li:hover {
+  background: rgba(33,150,243,0.2); /* nur minimal dunkler */
+  cursor: default; /* kein Link-Cursor */
+}
+
 
 /* PROJECTS */
 .project-list {
