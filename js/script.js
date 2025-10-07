@@ -2,17 +2,29 @@
 // Navigation Toggle
 // ==========================
 const navToggle = document.querySelector('.nav-toggle');
-const nav = document.querySelector('nav ul');
+const navMenu = document.querySelector('nav ul');
+const navLinks = document.querySelectorAll('nav a');
 
 navToggle.addEventListener('click', () => {
-  nav.classList.toggle('show');
+  navToggle.classList.toggle('active');
+  navMenu.classList.toggle('show');
 });
 
-// Menü schließen bei Klick auf Link (mobil)
-document.querySelectorAll('nav a').forEach(link =>
-  link.addEventListener('click', () => nav.classList.remove('show'))
+// Menü schließen, wenn Link geklickt wird
+navLinks.forEach(link =>
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('show');
+    navToggle.classList.remove('active');
+  })
 );
 
+// Menü-Reset beim Resize (verhindert Aufpoppen)
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    navMenu.classList.remove('show');
+    navToggle.classList.remove('active');
+  }
+});
 // ==========================
 // Back to Top Button
 // ==========================
