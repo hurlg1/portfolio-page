@@ -182,11 +182,12 @@ h2 {
 
 /* ABOUT */
 .about-grid {
-  display:grid;
-  grid-template-columns:200px 1fr;
-  gap:1.25rem;
-  align-items:start;
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 2fr; /* bild flexibel */
+  gap: 1.5rem;
+  align-items: center; /* vertikal zentrieren */
 }
+
 .profile { text-align:center; }
 .profile-pic {
   width:160px; height:160px;
@@ -302,9 +303,18 @@ footer {
 }
 
 @media (max-width: 768px) {
-  /* Burger sichtbar machen */
+  /* burger sichtbar */
   .nav-toggle {
     display: block;
+  }
+  .about-grid {
+    grid-template-columns: 1fr; /* bild + Text untereinander */
+    text-align: center;          /* zentrierung für mobile */
+    gap: 1rem;
+  }
+
+  .about-content {
+    padding: 0 1rem; /* etwas abstand links/rechts */
   }
 
   /* Mobile Menü */
