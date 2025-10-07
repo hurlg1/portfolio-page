@@ -2,23 +2,29 @@
 // Navigation Toggle
 // ==========================
 const navToggle = document.querySelector('.nav-toggle');
-const navTop = document.querySelector('.nav-top');
+const nav = document.querySelector('nav ul');
 
 navToggle.addEventListener('click', () => {
-  navTop.classList.toggle('show');
+  nav.classList.toggle('show');
 });
+
+// Menü schließen bei Klick auf Link (mobil)
+document.querySelectorAll('nav a').forEach(link =>
+  link.addEventListener('click', () => nav.classList.remove('show'))
+);
 
 // ==========================
 // Back to Top Button
 // ==========================
 const backToTop = document.getElementById("backToTop");
+const SCROLL_TRIGGER = 300;
 
 window.addEventListener("scroll", () => {
-  backToTop.classList.toggle("show", window.scrollY > 300);
+  backToTop.classList.toggle("show", window.scrollY > SCROLL_TRIGGER);
 });
 
 backToTop.addEventListener("click", () => {
-  window.scrollTo({ top:0, behavior:"smooth" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 // ==========================
@@ -33,13 +39,13 @@ const projects = [
 
 const projectList = document.querySelector(".project-list");
 
-projects.forEach(proj => {
+projects.forEach(({ name, description, link }) => {
   const article = document.createElement("article");
   article.classList.add("project");
   article.innerHTML = `
-    <h3>${proj.name}</h3>
-    <p>${proj.description}</p>
-    <a href="${proj.link}">Repo / Demo</a>
+    <h3>${name}</h3>
+    <p>${description}</p>
+    <a href="${link}" target="_blank">Repo / Demo</a>
   `;
   projectList.appendChild(article);
 });
