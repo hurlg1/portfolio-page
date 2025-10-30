@@ -465,3 +465,25 @@ footer {
     display: none !important;
   }
 }
+/* Extra kleiner Breakpoint für sehr kleine Geräte */
+@media (max-width: 480px) {
+  #hero h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Kleinere Überschrift */
+  }
+  #hero p {
+    font-size: clamp(0.9rem, 2vw, 1.2rem); /* Kleinere Beschreibung */
+  }
+  .profile-pic {
+    width: 120px;
+    height: 120px; /* Kleineres Profilbild */
+  }
+  .skills-list li {
+    font-size: 0.75rem; /* Kleinere Skills-Tags */
+  }
+  .project h3 {
+    font-size: 1rem; /* Kleinere Projektüberschriften */
+  }
+  .project-media {
+    aspect-ratio: 4 / 3; /* Anpassung für kleinere Screens */
+  }
+}
