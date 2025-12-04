@@ -1,0 +1,55 @@
+name: Update Strava Data Daily
+
+on:
+  schedule:
+    - cron: "0 4 * * *"  # Läuft täglich um 04:00 UTC
+  workflow_dispatch:     # Manuelles Starten möglich
+
+jobs:
+  update-strava-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Get Strava Access Token
+        id: get_token
+        run: |
+          RESPONSE=$(curl -X POST https://www.strava.com/api/v3/oauth/token \
+            -d client_id=${{ secrets.STRAVA_CLIENT_ID }} \
+            -d client_secret=${{ secrets.STRAVA_CLIENT_SECRET }} \
+            -d refresh_token=${{ secrets.STRAVA_REFRESH_TOKEN }} \
+            -d grant_type=refresh_token)
+
+          echo "Strava response: $RESPONSE"
+
+          ACCESS_TOKEN=$(echo $RESPONSE | jq -r '.access_token')
+          echo "access_token=$ACCESS_TOKEN" >> $GITHUB_OUTPUT
+
+      - name: Fetch Latest Activities
+        run: |
+          mkdir -p data
+
+          curl -H "Authorization: Bearer ${{ steps.get_token.outputs.access_token }}" \
+            "https://www.strava.com/api/v3/athlete/activities?per_page=50" \
+            -o data/activities.json
+
+          echo "Fetched activities:"
+          head data/activities.json || true
+
+      - name: Commit and Push
+        run: |
+          if git diff --quiet; then
+            echo "No changes in data/activities.json – skipping commit."
+            exit 0
+          fi
+
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add data/activities.json
+          git commit -m "Daily Strava update"
+          git push
