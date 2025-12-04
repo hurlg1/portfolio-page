@@ -51,50 +51,6 @@ function cacheData(key, defaultData) {
 }
 
 // ==========================
-// projekte dynamisch einfügen + caching
-// ==========================
-const projectList = document.querySelector(".project-list");
-const cachedProjects = cacheData('projects', [
-  { name: "Projekt 1", description: "Kurze Beschreibung von Projekt 1", link: "#", media: '<img src="img/beach.jpg" alt="Projekt 1">' },
-  { name: "Projekt 2", description: "Kurze Beschreibung von Projekt 2", link: "#" },
-  { name: "Projekt 3", description: "Kurze Beschreibung von Projekt 3", link: "#" },
-  { name: "Projekt 4", description: "Kurze Beschreibung von Projekt 4", link: "#" }
-]);
-
-// intersection observer für projekte
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, index * 120);
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
-
-function renderProjects(projects) {
-  projectList.innerHTML = ''; // vorher löschen
-  projects.forEach(({ name, description, link, media }) => {
-    const article = document.createElement("article");
-    article.classList.add("project");
-    article.innerHTML = `
-      ${media ? `<div class="project-media">${media}</div>` : `<div class="project-media"></div>`}
-      <h3>${name}</h3>
-      <p>${description}</p>
-      <a href="${link}" target="_blank">Repo / Demo</a>
-    `;
-    projectList.appendChild(article);
-    observer.observe(article);
-  });
-}
-
-renderProjects(cachedProjects);
-
-// ==========================
 // about + skills caching
 // ==========================
 const aboutContentEl = document.querySelector('#about .about-content p');
@@ -143,4 +99,96 @@ window.addEventListener("scroll", () => {
 
   lastScrollY = currentY;
 });
+
+/* ====== Ergänzungen: Robustere Mobile-Nav-Interaktion (ohne Redeklaration!) ====== */
+
+// Schliessen mit ESC
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    navMenu.classList.remove("show");
+    navToggle.classList.remove("active");
+  }
+});
+
+// Menü schliessen beim Resize (damit Desktop immer korrekt ist)
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 768) {
+    navMenu.classList.remove("show");
+    navToggle.classList.remove("active");
+  }
+});
+
+// Mobile: Menü schliessen beim Klick auf einen Link
+navMenu.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (window.innerWidth <= 768) {
+      navMenu.classList.remove("show");
+      navToggle.classList.remove("active");
+    }
+  });
+});
+/* ===== Load Strava Running Data ====== */
+
+async function loadStravaData() {
+    const latestRunBox = document.getElementById("latest-run");
+    const chartCanvas = document.getElementById("weeklyChart");
+
+    // Wenn Elemente fehlen → JS bricht nicht ab
+    if (!latestRunBox || !chartCanvas) {
+        console.warn("Running-Section nicht im DOM gefunden.");
+        return;
+    }
+
+    try {
+        const response = await fetch("data/activities.json");
+        const activities = await response.json();
+
+        // Finde letzte Aktivität vom Typ "Run"
+        const lastRun = activities.find(a => a.type === "Run");
+
+        if (lastRun) {
+            const distKm = (lastRun.distance / 1000).toFixed(2);
+            const timeMin = (lastRun.moving_time / 60).toFixed(0);
+            const pace = (lastRun.moving_time / (lastRun.distance / 1000) / 60).toFixed(2);
+
+            latestRunBox.innerHTML = `
+                <h3>${new Date(lastRun.start_date).toLocaleDateString("de-DE")}</h3>
+                <p><strong>Distanz:</strong> ${distKm} km</p>
+                <p><strong>Dauer:</strong> ${timeMin} min</p>
+                <p><strong>Pace:</strong> ${pace} min/km</p>
+            `;
+        }
+
+        /* === Wochenkilometer für Chart === */
+        const weekData = Array(7).fill(0);
+        const today = new Date();
+
+        activities.forEach(a => {
+            if (a.type !== "Run") return;
+            const date = new Date(a.start_date);
+            const diff = Math.floor((today - date) / (1000 * 60 * 60 * 24));
+            if (diff < 7) {
+                weekData[6 - diff] += a.distance / 1000;
+            }
+        });
+
+        new Chart(chartCanvas, {
+            type: "bar",
+            data: {
+                labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
+                datasets: [{
+                    label: "Kilometer",
+                    data: weekData
+                }]
+            },
+            options: { responsive: true }
+        });
+
+    } catch (err) {
+        console.error(err);
+        latestRunBox.innerHTML = "<p>Fehler beim Laden der Daten.</p>";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadStravaData);
 
