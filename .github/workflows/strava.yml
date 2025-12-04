@@ -43,13 +43,18 @@ jobs:
 
       - name: Commit and Push
         run: |
-          if git diff --quiet; then
-            echo "No changes in data/activities.json – skipping commit."
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+
+          # Force-add data directory, even if new
+          git add -A data/
+
+          # If no changes, skip
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
             exit 0
           fi
 
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
-          git add data/activities.json
           git commit -m "Daily Strava update"
           git push
+
