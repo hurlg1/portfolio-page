@@ -135,34 +135,60 @@ async function loadStravaData() {
         const response = await fetch("data/activities.json");
         const activities = await response.json();
 
-        /* ======== LETZTE 5 LÄUFE ======== */
-        const lastRuns = activities
-            .filter(a => a.type === "Run")
-            .slice(0, 5);
+/* ======== LETZTE 5 LÄUFE ======== */
+const lastRuns = activities
+    .filter(a => a.type === "Run")
+    .slice(0, 5);
 
-        latestRunBox.innerHTML = `<h3>Letzte 5 Läufe</h3>`;
+latestRunBox.innerHTML = ""; // container leeren
 
-        lastRuns.forEach(run => {
-            const distKm = (run.distance / 1000).toFixed(2);
-            const timeMin = Math.round(run.moving_time / 60);
+const template = document.getElementById("run-template");
 
-            /* Pace korrekt als mm:ss berechnen */
-            const paceSeconds = run.moving_time / (run.distance / 1000);
-            const paceMin = Math.floor(paceSeconds / 60);
-            const paceSec = Math.round(paceSeconds % 60);
-            const paceFormatted = `${paceMin}:${paceSec.toString().padStart(2, "0")}`;
+lastRuns.forEach(run => {
+    const clone = template.content.cloneNode(true);
 
-            const date = new Date(run.start_date).toLocaleDateString("de-DE");
+    // Titel
+    clone.querySelector(".run-title").textContent = run.name || "Lauf";
 
-            latestRunBox.innerHTML += `
-                <div class="run-card">
-                    <h4>${date}</h4>
-                    <p><strong>Distanz:</strong> ${distKm} km</p>
-                    <p><strong>Dauer:</strong> ${timeMin} min</p>
-                    <p><strong>Pace:</strong> ${paceFormatted} min/km</p>
-                </div>
-            `;
-        });
+    // Datum
+    clone.querySelector(".run-date").textContent =
+        new Date(run.start_date).toLocaleDateString("de-DE");
+
+    // Distanz
+    clone.querySelector(".run-distance").textContent =
+        `${(run.distance / 1000).toFixed(2)} km`;
+
+    // Höhenmeter
+    clone.querySelector(".run-elevation").textContent =
+        `${run.total_elevation_gain || 0} m`;
+
+    // Dauer formatieren
+    const totalSec = run.moving_time;
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+
+    const durationFormatted =
+        h > 0
+            ? `${h}:${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`
+            : `${m}:${s.toString().padStart(2,"0")}`;
+
+    clone.querySelector(".run-duration").textContent = durationFormatted;
+
+    // Pace formatieren (mm:ss)
+    const paceSeconds = run.moving_time / (run.distance / 1000);
+    const paceMin = Math.floor(paceSeconds / 60);
+    const paceSec = Math.round(paceSeconds % 60);
+
+    clone.querySelector(".run-pace").textContent =
+        `${paceMin}:${paceSec.toString().padStart(2, "0")} min/km`;
+
+    latestRunBox.appendChild(clone);
+});
+
+/* ===== Zuletzt aktualisiert ===== */
+document.getElementById("run-updated").textContent =
+    "Zuletzt aktualisiert: " + new Date().toLocaleString("de-DE");
 
         /* ======== WOCHENCHART ======== */
         const weekData = Array(7).fill(0);

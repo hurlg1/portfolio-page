@@ -64,14 +64,30 @@
       </ul>
     </section>
 
-  <section id="running">
-    <h2>Meine letzten Läufe</h2>
+  <section id="running" class="card section-accent">
+    <h2>Latest Runs</h2>
 
-    <div id="latest-run" class="run-card">
-        <p>Daten werden geladen…</p>
-    </div>
+    <div id="latest-run"></div>
 
-    <h2>Laufaktivität der letzten 7 Tage</h2>
+    <!-- TEMPLATE für einen einzelnen Lauf -->
+    <template id="run-template">
+        <div class="run-card">
+            <h4 class="run-title"></h4>
+            <p class="run-date"></p>
+
+            <p class="run-stats-top">
+                <span class="run-distance"></span> · 
+                <span class="run-elevation"></span>
+            </p>
+
+            <p class="run-stats-bottom">
+                <span class="run-duration"></span> · 
+                <span class="run-pace"></span>
+            </p>
+        </div>
+    </template>
+
+    <p id="run-updated" class="run-updated"></p>
     <canvas id="weeklyChart"></canvas>
 </section>
   </main>
