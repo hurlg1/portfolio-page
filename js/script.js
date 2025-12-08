@@ -177,52 +177,17 @@ async function loadStravaData() {
             }
         });
 
-        new Chart(chartCanvas, {
+                new Chart(chartCanvas, {
             type: "bar",
             data: {
                 labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
                 datasets: [{
                     label: "Kilometer",
-                    data: weekData,
-                    backgroundColor: "rgba(0, 119, 255, 0.6)",
-                    hoverBackgroundColor: "rgba(0, 119, 255, 0.9)",
-                    borderRadius: 8,
-                    borderSkipped: false
+                    data: weekData
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: "#1e293b",
-                        titleColor: "#ffffff",
-                        bodyColor: "#ffffff",
-                        cornerRadius: 6,
-                        padding: 10,
-                        displayColors: false
-                    }
-                },
-
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: "rgba(0, 0, 0, 0.06)" },
-                        ticks: {
-                            color: "#1e293b",
-                            font: { size: 12 }
-                        }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: {
-                            color: "#1e293b",
-                            font: { size: 12 }
-                        }
-                    }
-                }
+                responsive: true
             }
         });
 
@@ -234,4 +199,5 @@ async function loadStravaData() {
 
 /* ============ Event Listener ============ */
 document.addEventListener("DOMContentLoaded", loadStravaData);
+
 
