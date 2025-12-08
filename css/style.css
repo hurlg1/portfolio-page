@@ -368,7 +368,14 @@ h2 {
   display: block;
   border-radius: 10px; /* soft edges for line chart */
 }
-
+.weekly-total {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--clr-primary);
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
 /* =========================================================
    FOOTER
 ========================================================= */
