@@ -75,27 +75,55 @@
         <h4 class="run-title"></h4>
         <p class="run-date"></p>
 
+        <!-- DISTANZ + HÖHENMETER -->
         <div class="run-row">
-            <span class="icon">📏</span>
+            <!-- Distanz Icon -->
+            <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3h18v18H3z"/>
+                </svg>
+            </span>
             <span class="run-distance"></span>
 
             <span class="dot">·</span>
 
-            <span class="icon">⛰️</span>
+            <!-- Höhenmeter Icon -->
+            <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 20l9-16 9 16H3z"/>
+                </svg>
+            </span>
             <span class="run-elevation"></span>
         </div>
 
+        <!-- DAUER + PACE -->
         <div class="run-row">
-            <span class="icon">⏱️</span>
+            <!-- Dauer Icon -->
+            <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+            </span>
             <span class="run-duration"></span>
 
             <span class="dot">·</span>
 
-            <span class="icon">🏃‍♂️</span>
+            <!-- Pace Icon -->
+            <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2L3 14h9l-1 8L21 10h-9l1-8z"/>
+                </svg>
+            </span>
             <span class="run-pace"></span>
         </div>
     </div>
 </template>
+
 
     <p id="run-updated" class="run-updated"></p>
     <canvas id="weeklyChart"></canvas>
