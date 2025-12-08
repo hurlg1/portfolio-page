@@ -176,35 +176,91 @@ function renderLastUpdated(activities) {
    WEEKLY CHART
 ========================================================= */
 function renderWeeklyChart(activities, canvas) {
-const weekData = Array(7).fill(0);
+  const ctx = canvas.getContext("2d");
 
-activities.forEach(a => {
-  if (a.type !== "Run") return;
+  // Woche: Montag (0) bis Sonntag (6)
+  const weekData = Array(7).fill(0);
 
-  const day = new Date(a.start_date).getDay();
-  const dayIndex = (day + 6) % 7; // Montag = 0 ... Sonntag = 6
+  activities.forEach(a => {
+    if (a.type !== "Run") return;
 
-  weekData[dayIndex] += a.distance / 1000;
-});
+    const day = new Date(a.start_date).getDay(); // So = 0 → Mo = 1
+    const dayIndex = (day + 6) % 7;              // Mo = 0 … So = 6
+
+    weekData[dayIndex] += a.distance / 1000;
+  });
+
+  // FARBE: nutze dein Blau
+  const lineColor = "rgba(33,150,243,1)";
+  const fillColor = ctx.createLinearGradient(0, 0, 0, 300);
+  fillColor.addColorStop(0, "rgba(33,150,243,0.30)");
+  fillColor.addColorStop(1, "rgba(33,150,243,0)");
 
   new Chart(canvas, {
-    type: "bar",
+    type: "line",
     data: {
       labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
       datasets: [{
-        label: "Kilometer",
         data: weekData,
-        backgroundColor: "rgba(33,150,243,0.65)",
-        borderRadius: 6,
+        borderColor: lineColor,
+        backgroundColor: fillColor,
+        tension: 0.35,        // weiche Strava-Kurve
+        borderWidth: 3,
+
+        // STRAVA dots
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        pointBackgroundColor: varPrimary(), // CSS-Variable
+        pointBorderColor: "#fff",
+        pointBorderWidth: 2
       }]
     },
     options: {
       responsive: true,
       scales: {
-        y: { beginAtZero: true }
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: "#6b7280",
+            font: { size: 12 }
+          }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: "#6b7280",
+            font: { size: 12 }
+          },
+          grid: { color: "rgba(0,0,0,0.08)" }
+        }
+      },
+
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "rgba(30,41,59,0.9)",
+          padding: 10,
+          borderRadius: 6,
+          displayColors: false,
+          callbacks: {
+            label: (ctx) => `${ctx.raw.toFixed(2)} km`
+          }
+        }
+      },
+
+      animation: {
+        duration: 1000,
+        easing: "easeOutQuart"
       }
     }
   });
+}
+
+// Helfer: CSS-Variable im JS verwenden
+function varPrimary() {
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue("--clr-primary")
+    .trim();
 }
 
 /* =========================================================

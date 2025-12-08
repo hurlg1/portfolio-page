@@ -327,41 +327,46 @@ h2 {
 }
 
 /* =========================================================
-   WEEKLY CHART CARD
+   WEEKLY CHART – CLEAN BLUE STRAVA-STYLE
 ========================================================= */
 .chart-title {
   font-family: var(--font-heading);
   font-size: 1.35rem;
   margin: 2.5rem 0 1rem 0;
+  color: var(--clr-text);
 }
 
 .chart-card {
-  padding: 1.5rem;
   background: var(--clr-surface);
+  padding: 1.5rem;
   border-radius: 14px;
   box-shadow: var(--shadow);
+  margin-bottom: 3rem;
+
+  /* smoother, subtle card look */
   position: relative;
   overflow: hidden;
-  margin-bottom: 3rem;
 }
 
-/* Subtle performance-grid overlay */
+/* Light background texture (very subtle) */
 .chart-card::before {
   content: "";
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(90deg, rgba(33,150,243,0.05) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(33,150,243,0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: .4;
+    linear-gradient(90deg, rgba(33,150,243,0.03) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(33,150,243,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: .3;
   pointer-events: none;
 }
 
+/* Canvas takes full card size */
 #weeklyChart {
   width: 100% !important;
   height: 320px !important;
   display: block;
+  border-radius: 10px; /* soft edges for line chart */
 }
 
 /* =========================================================
