@@ -18,14 +18,6 @@ navLinks.forEach(link =>
   })
 );
 
-// menü-reset beim resize (verhindert aufpoppen)
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 768) {
-    navMenu.classList.remove('show');
-    navToggle.classList.remove('active');
-  }
-});
-
 // ==========================
 // back to top button
 // ==========================
