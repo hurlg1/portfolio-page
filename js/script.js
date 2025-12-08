@@ -178,45 +178,47 @@ function renderLastUpdated(activities) {
 function renderWeeklyChart(activities, canvas) {
     const ctx = canvas.getContext("2d");
 
-    const DAYS = 7;
     const today = new Date();
+    const DAYS = 7;
 
-    // Labels = letzte 7 Tage (ältester Tag links)
+    // Arrays initialisieren
     const labels = [];
-    const kmData = [];
+    const kmData = new Array(DAYS).fill(0);
+
+    // 7-Tage-Fenster erzeugen (Mo, Di, Mi ...)
+    const dayNames = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 
     for (let i = DAYS - 1; i >= 0; i--) {
         const d = new Date(today);
         d.setDate(today.getDate() - i);
 
-        labels.push(
-            d.toLocaleDateString("de-DE", { weekday: "short" })  // Mo, Di, Mi...
-        );
-
-        kmData.push(0); // erstmal alles 0
+        labels.push(dayNames[d.getDay()]);
     }
 
-    // Jetzt Läufe der letzten 7 Tage zuordnen
+    // Aktivitäten auf die richtigen Indexe legen
     activities.forEach(run => {
         if (run.type !== "Run") return;
 
-        const runDate = new Date(run.start_date);
-        const diffDays = Math.floor((today - runDate) / (1000 * 60 * 60 * 24));
+        const date = new Date(run.start_date_local || run.start_date);
 
-        if (diffDays >= 0 && diffDays < DAYS) {
-            const index = DAYS - 1 - diffDays;
+        // Differenz zur heutigen DATE (nicht Zeitpunkt!)
+        const dayDiff = Math.floor((today - date) / (1000 * 60 * 60 * 24));
+
+        if (dayDiff >= 0 && dayDiff < DAYS) {
+            // Der Index korrespondiert exakt zu labels[]
+            const index = DAYS - 1 - dayDiff;
             kmData[index] += run.distance / 1000;
         }
     });
 
-    // Theme-Farbe aus CSS
+    // Farbe aus CSS
     const lineColor = getComputedStyle(document.documentElement)
         .getPropertyValue("--clr-primary")
         .trim();
 
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, lineColor + "55");   // 33,150,243,0.33
-    gradient.addColorStop(1, lineColor + "00");   // transparent
+    gradient.addColorStop(0, lineColor + "44");
+    gradient.addColorStop(1, lineColor + "00");
 
     new Chart(canvas, {
         type: "line",
@@ -228,10 +230,9 @@ function renderWeeklyChart(activities, canvas) {
                 backgroundColor: gradient,
                 borderWidth: 3,
                 tension: 0.3,
-
                 pointRadius: 5,
                 pointBackgroundColor: lineColor,
-                pointBorderColor: "#ffffff",
+                pointBorderColor: "#fff",
                 pointBorderWidth: 2
             }]
         },
@@ -239,7 +240,7 @@ function renderWeeklyChart(activities, canvas) {
             responsive: true,
             plugins: {
                 legend: { display: false },
-                tooltip: { enabled: false }   // ❗ KEIN Hover
+                tooltip: { enabled: false } // keine Hover-Infos
             },
             scales: {
                 x: {
@@ -251,11 +252,11 @@ function renderWeeklyChart(activities, canvas) {
                 },
                 y: {
                     beginAtZero: true,
+                    grid: { color: "rgba(0,0,0,0.08)" },
                     ticks: {
                         color: "#6b7280",
                         font: { size: 12 }
-                    },
-                    grid: { color: "rgba(0,0,0,0.08)" }
+                    }
                 }
             }
         }
