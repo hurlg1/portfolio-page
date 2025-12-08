@@ -178,40 +178,59 @@ function renderLastUpdated(activities) {
 function renderWeeklyChart(activities, canvas) {
   const ctx = canvas.getContext("2d");
 
-  // Woche: Montag (0) bis Sonntag (6)
-  const weekData = Array(7).fill(0);
+  const DAYS = 7;
+  const MS_PER_DAY = 24 * 60 * 60 * 1000;
+  const today = new Date();
 
+  // Daten + Labels für die letzten 7 Tage (ältester Tag links, heute rechts)
+  const weekData = Array(DAYS).fill(0);
+  const labels = [];
+
+  // Labels dynamisch anhand der letzten 7 Tage bauen
+  for (let i = DAYS - 1; i >= 0; i--) {
+    const d = new Date(today.getTime() - i * MS_PER_DAY);
+    labels.push(
+      d.toLocaleDateString("de-DE", { weekday: "short" }) // z.B. "Mo", "Di"
+    );
+  }
+
+  // Aktivitäten nur aus den letzten 7 Tagen berücksichtigen
   activities.forEach(a => {
     if (a.type !== "Run") return;
 
-    const day = new Date(a.start_date).getDay(); // So = 0 → Mo = 1
-    const dayIndex = (day + 6) % 7;              // Mo = 0 … So = 6
+    const date = new Date(a.start_date);
+    const diff = Math.floor((today - date) / MS_PER_DAY); // 0 = heute, 1 = gestern, ...
 
-    weekData[dayIndex] += a.distance / 1000;
+    if (diff >= 0 && diff < DAYS) {
+      // Index so drehen, dass der älteste Tag links, der neueste rechts ist
+      const index = DAYS - 1 - diff;
+      weekData[index] += a.distance / 1000;
+    }
   });
 
-  // FARBE: nutze dein Blau
-  const lineColor = "rgba(33,150,243,1)";
+  // Farben aus deiner Seite
+  const lineColor = getComputedStyle(document.documentElement)
+    .getPropertyValue("--clr-primary")
+    .trim();
+
   const fillColor = ctx.createLinearGradient(0, 0, 0, 300);
-  fillColor.addColorStop(0, "rgba(33,150,243,0.30)");
-  fillColor.addColorStop(1, "rgba(33,150,243,0)");
+  fillColor.addColorStop(0, lineColor.replace(")", ", 0.30)").replace("rgb", "rgba"));
+  fillColor.addColorStop(1, lineColor.replace(")", ", 0)").replace("rgb", "rgba"));
 
   new Chart(canvas, {
     type: "line",
     data: {
-      labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
+      labels,
       datasets: [{
         data: weekData,
         borderColor: lineColor,
         backgroundColor: fillColor,
-        tension: 0.35,        // weiche Strava-Kurve
+        tension: 0.35,
         borderWidth: 3,
-
-        // STRAVA dots
         pointRadius: 5,
-        pointHoverRadius: 7,
-        pointBackgroundColor: varPrimary(), // CSS-Variable
-        pointBorderColor: "#fff",
+        pointHoverRadius: 5, // kein größerer Hoverpunkt
+        pointBackgroundColor: lineColor,
+        pointBorderColor: "#ffffff",
         pointBorderWidth: 2
       }]
     },
@@ -220,34 +239,20 @@ function renderWeeklyChart(activities, canvas) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: {
-            color: "#6b7280",
-            font: { size: 12 }
-          }
+          ticks: { color: "#6b7280", font: { size: 12 } }
         },
         y: {
           beginAtZero: true,
-          ticks: {
-            color: "#6b7280",
-            font: { size: 12 }
-          },
-          grid: { color: "rgba(0,0,0,0.08)" }
+          grid: { color: "rgba(0,0,0,0.08)" },
+          ticks: { color: "#6b7280", font: { size: 12 } }
         }
       },
-
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: "rgba(30,41,59,0.9)",
-          padding: 10,
-          borderRadius: 6,
-          displayColors: false,
-          callbacks: {
-            label: (ctx) => `${ctx.raw.toFixed(2)} km`
-          }
+          enabled: false   // 👉 kein Hover-Tooltip mehr
         }
       },
-
       animation: {
         duration: 1000,
         easing: "easeOutQuart"
