@@ -77,47 +77,58 @@
 
     <div id="latest-run"></div>
 
-    <!-- TEMPLATE -->
-    <template id="run-template">
-      <div class="run-card">
-        <h4 class="run-title"></h4>
-        <p class="run-date"></p>
+<template id="run-template">
+  <div class="run-card">
+    <h4 class="run-title"></h4>
+    <p class="run-date"></p>
 
-        <div class="run-row">
-          <!-- DISTANZ Icon -->
-<span class="icon">
-  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="7" r="3"/>
-    <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
-  </svg>
-</span>
+    <!-- DISTANZ + HÖHENMETER -->
+    <div class="run-row">
+      <!-- Distanz Icon -->
+      <span class="icon">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="7" r="3"/>
+          <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
+        </svg>
+      </span>
+      <span class="run-distance"></span>
 
-<!-- HÖHENMETER Icon -->
-<span class="icon">
-  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 18l7-12 4 8 3-4 4 8z"/>
-  </svg>
-</span>
+      <span class="dot">·</span>
 
-<!-- DAUER Icon -->
-<span class="icon">
-  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="9"/>
-    <path d="M12 7v5l3 2"/>
-  </svg>
-</span>
+      <!-- Höhenmeter Icon -->
+      <span class="icon">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 18l7-12 4 8 3-4 4 8z"/>
+        </svg>
+      </span>
+      <span class="run-elevation"></span>
+    </div>
 
-<!-- PACE Icon -->
-<span class="icon">
-  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 12h14"/>
-    <path d="M13 6l6 6-6 6"/>
-  </svg>
-</span>
-          <span class="run-pace"></span>
-        </div>
-      </div>
-    </template>
+    <!-- DAUER + PACE -->
+    <div class="run-row">
+      <!-- Dauer Icon -->
+      <span class="icon">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+      </span>
+      <span class="run-duration"></span>
+
+      <span class="dot">·</span>
+
+      <!-- Pace Icon -->
+      <span class="icon">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/>
+          <path d="M13 6l6 6-6 6"/>
+        </svg>
+      </span>
+      <span class="run-pace"></span>
+    </div>
+
+  </div>
+</template>
 
     <h3>Weekly Distance</h3>
     <div class="chart-card">
