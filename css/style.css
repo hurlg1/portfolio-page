@@ -16,19 +16,19 @@
   --font-heading: "Manrope", sans-serif;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: var(--font-main);
-  font-size:16px;
-  line-height:1.5;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--clr-text);
   background-color: var(--clr-bg);
   scroll-behavior: smooth;
 }
 
 /* ===============================
-   HEADER / NAVIGATION (zentriert)
+   HEADER / NAVIGATION
 =============================== */
 .header {
   position: fixed;
@@ -56,13 +56,8 @@ body {
   transition: width 0.6s ease;
 }
 
-.header.scrolled::after {
-  width: 90%;
-}
-
-.header.hide {
-  transform: translateY(-100%);
-}
+.header.scrolled::after { width: 90%; }
+.header.hide { transform: translateY(-100%); }
 
 /* Logo */
 .logo {
@@ -94,7 +89,7 @@ nav a {
   transition: all 0.3s ease;
 }
 nav a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255,255,255,0.2);
   transform: translateY(-2px);
 }
 
@@ -114,17 +109,20 @@ nav a:hover {
   animation: gradientMove 12s ease infinite;
   padding:0 2rem;
 }
+
 @keyframes gradientMove {
   0% { background-position:0% 50%; }
   50% { background-position:100% 50%; }
   100% { background-position:0% 50%; }
 }
+
 #hero h1 {
   font-size: clamp(2rem,6vw,5rem);
   font-family: var(--font-heading);
   font-weight:700;
   margin-bottom:1rem;
 }
+
 #hero p {
   font-size: clamp(1rem,2vw,1.5rem);
   margin-bottom:2rem;
@@ -157,6 +155,7 @@ main {
   margin: 0 auto;
   padding: 8rem 1.5rem 2rem;
 }
+
 section {
   background-color: var(--clr-surface);
   padding:3rem 1.5rem;
@@ -164,16 +163,19 @@ section {
   margin-bottom:2rem;
   box-shadow: var(--shadow);
 }
+
 .card {
   background: var(--clr-surface);
   padding: 2rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
+
 .section-accent {
   position: relative;
   overflow: visible;
 }
+
 .section-accent::before {
   content: "";
   position: absolute;
@@ -186,19 +188,24 @@ section {
   background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light));
   box-shadow: 0 4px 10px rgba(33,150,243,0.12);
 }
+
 h2 {
   font-family: var(--font-heading);
   margin-bottom:1.5rem;
 }
 
-/* ABOUT */
+/* ===============================
+   ABOUT
+=============================== */
 .about-grid {
   display: grid;
   grid-template-columns: minmax(120px, 1fr) 2fr;
   gap: 1.5rem;
   align-items: center;
 }
+
 .profile { text-align:center; }
+
 .profile-pic {
   width: 160px;
   height: 160px;
@@ -213,7 +220,9 @@ h2 {
 
 .muted { color:#6b7280; font-size:0.85rem; }
 
-/* SKILLS */
+/* ===============================
+   SKILLS
+=============================== */
 .skills-list {
   list-style:none;
   display:flex;
@@ -229,7 +238,9 @@ h2 {
   font-size: 0.85rem;
 }
 
-/* FOOTER */
+/* ===============================
+   FOOTER
+=============================== */
 footer {
   text-align:center;
   padding:2rem;
@@ -237,7 +248,9 @@ footer {
   font-size:0.9rem;
 }
 
-/* BACK TO TOP */
+/* ===============================
+   BACK TO TOP BUTTON
+=============================== */
 #backToTop {
   position:fixed;
   bottom:25px; right:25px;
@@ -253,10 +266,7 @@ footer {
   box-shadow: var(--shadow);
   transition: all 0.3s ease;
 }
-#backToTop.show {
-  opacity:0.9;
-  pointer-events:auto;
-}
+#backToTop.show { opacity:0.9; pointer-events:auto; }
 #backToTop:hover {
   background: var(--clr-primary-light);
   transform: translateY(-3px);
@@ -278,8 +288,8 @@ footer {
 }
 .nav-toggle.active { transform: rotate(90deg); }
 
-/* Mobile menu */
 @media (max-width: 768px) {
+
   .header::after { display: none; }
   .nav-toggle { display: block; }
 
@@ -297,6 +307,7 @@ footer {
     transform: scale(1.05);
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
+
   nav ul.show {
     opacity:1;
     pointer-events:all;
@@ -315,7 +326,6 @@ footer {
   }
 }
 
-/* Desktop fix */
 @media (min-width: 769px) {
   nav ul {
     opacity: 1 !important;
@@ -336,7 +346,7 @@ footer {
 }
 
 /* ===============================
-   RUNNING SECTION (Strava)
+   RUNNING SECTION
 =============================== */
 
 #running h2 {
@@ -345,16 +355,22 @@ footer {
   margin-bottom: 1.5rem;
 }
 
-/* Run Card Base */
-.run-card {
-  background: var(--clr-surface);
-  padding: 1.5rem 1.7rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 1.5rem;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+/* GRID FOR RUN CARDS */
+#latest-run {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
 }
 
+/* Run Card */
+.run-card {
+  background: var(--clr-surface);
+  padding: 1.3rem 1.4rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
 .run-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
@@ -376,7 +392,7 @@ footer {
   margin-bottom: 0.9rem;
 }
 
-/* Layout Rows */
+/* Rows */
 .run-row {
   display: flex;
   align-items: center;
@@ -391,24 +407,22 @@ footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1rem;
-  height: 1rem;
-  color: var(--clr-primary);      /* einfarbig, zum Design passend */
-  opacity: 0.9;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--clr-primary);
 }
-
 .run-row .icon svg {
   width: 100%;
   height: 100%;
 }
 
-/* Divider Dot */
+/* Separator Dot */
 .run-row .dot {
   opacity: 0.4;
-  margin: 0 0.15rem;
+  margin: 0 0.2rem;
 }
 
-/* "Zuletzt aktualisiert" */
+/* Updated Timestamp */
 .run-updated {
   font-size: 0.75rem;
   opacity: 0.6;
@@ -416,46 +430,29 @@ footer {
 }
 
 /* ===============================
-   WEEKLY CHART – Modern UI Style
+   WEEKLY CHART STYLING
 =============================== */
-
 #weeklyChart {
   width: 100%;
-  max-width: 100%;
   height: 320px;
   display: block;
-
-  /* Harmoniert mit run-cards */
   background: var(--clr-surface);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-
   padding: 1rem;
   margin: 2rem auto 0 auto;
 }
 
-/* Container optional (falls du eine Card-Optik willst) */
-.chart-wrapper {
-  background: var(--clr-surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 1.5rem;
-  margin-top: 2rem;
-}
-
-/* Chart.js canvas must be responsive */
 canvas#weeklyChart {
   width: 100% !important;
   height: 100% !important;
 }
 
-/* Achsen-Beschriftungen */
 .chartjs-render-monitor text {
   fill: var(--clr-text) !important;
   font-family: var(--font-main);
 }
 
-/* Tooltip – weich und modern */
 .chart-tooltip {
   background: var(--clr-text);
   color: white;
@@ -464,26 +461,9 @@ canvas#weeklyChart {
   box-shadow: var(--shadow);
 }
 
-/* Mobile Tweaks */
 @media (max-width: 480px) {
   #weeklyChart {
     height: 240px;
     padding: 0.6rem;
   }
 }
-
-
-@media (max-width: 480px) {
-  .run-card { 
-    padding: 1.2rem; 
-  }
-
-  .run-title { 
-    font-size: 1.05rem; 
-  }
-
-  .run-row { 
-    font-size: 0.88rem; 
-  }
-}
-
