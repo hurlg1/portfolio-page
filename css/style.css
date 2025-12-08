@@ -415,14 +415,63 @@ footer {
   margin-top: 0.7rem;
 }
 
-/* Weekly Chart Canvas */
+/* ===============================
+   WEEKLY CHART – Modern UI Style
+=============================== */
+
 #weeklyChart {
   width: 100%;
-  max-width: 700px;
-  height: 300px;
+  max-width: 100%;
+  height: 320px;
   display: block;
-  margin: 1.5rem auto 0 auto;
+
+  /* Harmoniert mit run-cards */
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+
+  padding: 1rem;
+  margin: 2rem auto 0 auto;
 }
+
+/* Container optional (falls du eine Card-Optik willst) */
+.chart-wrapper {
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Chart.js canvas must be responsive */
+canvas#weeklyChart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Achsen-Beschriftungen */
+.chartjs-render-monitor text {
+  fill: var(--clr-text) !important;
+  font-family: var(--font-main);
+}
+
+/* Tooltip – weich und modern */
+.chart-tooltip {
+  background: var(--clr-text);
+  color: white;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+/* Mobile Tweaks */
+@media (max-width: 480px) {
+  #weeklyChart {
+    height: 240px;
+    padding: 0.6rem;
+  }
+}
+
 
 @media (max-width: 480px) {
   .run-card { 
@@ -435,10 +484,6 @@ footer {
 
   .run-row { 
     font-size: 0.88rem; 
-  }
-
-  #weeklyChart { 
-    height: 240px; 
   }
 }
 
