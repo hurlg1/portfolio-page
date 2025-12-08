@@ -176,89 +176,90 @@ function renderLastUpdated(activities) {
    WEEKLY CHART
 ========================================================= */
 function renderWeeklyChart(activities, canvas) {
-  const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
-  const DAYS = 7;
-  const MS_PER_DAY = 24 * 60 * 60 * 1000;
-  const today = new Date();
+    const DAYS = 7;
+    const today = new Date();
 
-  // Daten + Labels für die letzten 7 Tage (ältester Tag links, heute rechts)
-  const weekData = Array(DAYS).fill(0);
-  const labels = [];
+    // Labels = letzte 7 Tage (ältester Tag links)
+    const labels = [];
+    const kmData = [];
 
-  // Labels dynamisch anhand der letzten 7 Tage bauen
-  for (let i = DAYS - 1; i >= 0; i--) {
-    const d = new Date(today.getTime() - i * MS_PER_DAY);
-    labels.push(
-      d.toLocaleDateString("de-DE", { weekday: "short" }) // z.B. "Mo", "Di"
-    );
-  }
+    for (let i = DAYS - 1; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
 
-  // Aktivitäten nur aus den letzten 7 Tagen berücksichtigen
-  activities.forEach(a => {
-    if (a.type !== "Run") return;
+        labels.push(
+            d.toLocaleDateString("de-DE", { weekday: "short" })  // Mo, Di, Mi...
+        );
 
-    const date = new Date(a.start_date);
-    const diff = Math.floor((today - date) / MS_PER_DAY); // 0 = heute, 1 = gestern, ...
-
-    if (diff >= 0 && diff < DAYS) {
-      // Index so drehen, dass der älteste Tag links, der neueste rechts ist
-      const index = DAYS - 1 - diff;
-      weekData[index] += a.distance / 1000;
+        kmData.push(0); // erstmal alles 0
     }
-  });
 
-  // Farben aus deiner Seite
-  const lineColor = getComputedStyle(document.documentElement)
-    .getPropertyValue("--clr-primary")
-    .trim();
+    // Jetzt Läufe der letzten 7 Tage zuordnen
+    activities.forEach(run => {
+        if (run.type !== "Run") return;
 
-  const fillColor = ctx.createLinearGradient(0, 0, 0, 300);
-  fillColor.addColorStop(0, lineColor.replace(")", ", 0.30)").replace("rgb", "rgba"));
-  fillColor.addColorStop(1, lineColor.replace(")", ", 0)").replace("rgb", "rgba"));
+        const runDate = new Date(run.start_date);
+        const diffDays = Math.floor((today - runDate) / (1000 * 60 * 60 * 24));
 
-  new Chart(canvas, {
-    type: "line",
-    data: {
-      labels,
-      datasets: [{
-        data: weekData,
-        borderColor: lineColor,
-        backgroundColor: fillColor,
-        tension: 0.35,
-        borderWidth: 3,
-        pointRadius: 5,
-        pointHoverRadius: 5, // kein größerer Hoverpunkt
-        pointBackgroundColor: lineColor,
-        pointBorderColor: "#ffffff",
-        pointBorderWidth: 2
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: { color: "#6b7280", font: { size: 12 } }
+        if (diffDays >= 0 && diffDays < DAYS) {
+            const index = DAYS - 1 - diffDays;
+            kmData[index] += run.distance / 1000;
+        }
+    });
+
+    // Theme-Farbe aus CSS
+    const lineColor = getComputedStyle(document.documentElement)
+        .getPropertyValue("--clr-primary")
+        .trim();
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, lineColor + "55");   // 33,150,243,0.33
+    gradient.addColorStop(1, lineColor + "00");   // transparent
+
+    new Chart(canvas, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                data: kmData,
+                borderColor: lineColor,
+                backgroundColor: gradient,
+                borderWidth: 3,
+                tension: 0.3,
+
+                pointRadius: 5,
+                pointBackgroundColor: lineColor,
+                pointBorderColor: "#ffffff",
+                pointBorderWidth: 2
+            }]
         },
-        y: {
-          beginAtZero: true,
-          grid: { color: "rgba(0,0,0,0.08)" },
-          ticks: { color: "#6b7280", font: { size: 12 } }
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false }   // ❗ KEIN Hover
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: "#6b7280",
+                        font: { size: 12 }
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#6b7280",
+                        font: { size: 12 }
+                    },
+                    grid: { color: "rgba(0,0,0,0.08)" }
+                }
+            }
         }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          enabled: false   // 👉 kein Hover-Tooltip mehr
-        }
-      },
-      animation: {
-        duration: 1000,
-        easing: "easeOutQuart"
-      }
-    }
-  });
+    });
 }
 
 // Helfer: CSS-Variable im JS verwenden
