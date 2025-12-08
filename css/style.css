@@ -338,44 +338,97 @@ footer {
 /* ===============================
    RUNNING SECTION (Strava)
 =============================== */
+
 #running h2 {
   text-align: left;
   font-family: var(--font-heading);
   margin-bottom: 1.5rem;
 }
 
+/* Run Card Base */
 .run-card {
   background: var(--clr-surface);
-  padding: 2rem;
+  padding: 1.5rem 1.7rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.run-card h3 {
-  margin-top: 0;
-  margin-bottom: 0.75rem;
+.run-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+/* Run Title */
+.run-title {
   font-family: var(--font-heading);
   font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
   color: var(--clr-text);
 }
 
-.run-card p {
-  margin: 0.3rem 0;
-  font-size: 1rem;
+/* Date */
+.run-date {
+  font-size: 0.95rem;
+  opacity: 0.7;
+  margin-bottom: 0.9rem;
 }
 
+/* Layout Rows */
+.run-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.95rem;
+  color: var(--clr-text);
+}
+
+/* Icons */
+.run-row .icon {
+  font-size: 1rem;
+  opacity: 0.75;
+}
+
+/* Divider Dot */
+.run-row .dot {
+  opacity: 0.4;
+  margin: 0 0.15rem;
+}
+
+/* "Zuletzt aktualisiert" */
+.run-updated {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-top: 0.7rem;
+}
+
+/* Weekly Chart Canvas */
 #weeklyChart {
   width: 100%;
   max-width: 700px;
   height: 300px;
   display: block;
-  margin: 0 auto;
+  margin: 1.5rem auto 0 auto;
 }
 
 @media (max-width: 480px) {
-  .run-card { padding:1.25rem; }
-  .run-card h3 { font-size:1.05rem; }
-  .run-card p { font-size:0.9rem; }
-  #weeklyChart { height:240px; }
+  .run-card { 
+    padding: 1.2rem; 
+  }
+
+  .run-title { 
+    font-size: 1.05rem; 
+  }
+
+  .run-row { 
+    font-size: 0.88rem; 
+  }
+
+  #weeklyChart { 
+    height: 240px; 
+  }
 }
+

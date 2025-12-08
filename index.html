@@ -71,21 +71,31 @@
 
     <!-- TEMPLATE für einen einzelnen Lauf -->
     <template id="run-template">
-        <div class="run-card">
-            <h4 class="run-title"></h4>
-            <p class="run-date"></p>
+    <div class="run-card">
+        <h4 class="run-title"></h4>
+        <p class="run-date"></p>
 
-            <p class="run-stats-top">
-                <span class="run-distance"></span> · 
-                <span class="run-elevation"></span>
-            </p>
+        <div class="run-row">
+            <span class="icon">📏</span>
+            <span class="run-distance"></span>
 
-            <p class="run-stats-bottom">
-                <span class="run-duration"></span> · 
-                <span class="run-pace"></span>
-            </p>
+            <span class="dot">·</span>
+
+            <span class="icon">⛰️</span>
+            <span class="run-elevation"></span>
         </div>
-    </template>
+
+        <div class="run-row">
+            <span class="icon">⏱️</span>
+            <span class="run-duration"></span>
+
+            <span class="dot">·</span>
+
+            <span class="icon">🏃‍♂️</span>
+            <span class="run-pace"></span>
+        </div>
+    </div>
+</template>
 
     <p id="run-updated" class="run-updated"></p>
     <canvas id="weeklyChart"></canvas>
