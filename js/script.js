@@ -143,23 +143,36 @@ async function loadStravaData() {
         const response = await fetch("data/activities.json");
         const activities = await response.json();
 
-        // Finde letzte Aktivität vom Typ "Run"
-        const lastRun = activities.find(a => a.type === "Run");
+        /* ======== LETZTE 5 LÄUFE ======== */
+        const lastRuns = activities
+            .filter(a => a.type === "Run")
+            .slice(0, 5);
 
-        if (lastRun) {
-            const distKm = (lastRun.distance / 1000).toFixed(2);
-            const timeMin = (lastRun.moving_time / 60).toFixed(0);
-            const pace = (lastRun.moving_time / (lastRun.distance / 1000) / 60).toFixed(2);
+        latestRunBox.innerHTML = `<h3>Letzte 5 Läufe</h3>`;
 
-            latestRunBox.innerHTML = `
-                <h3>${new Date(lastRun.start_date).toLocaleDateString("de-DE")}</h3>
-                <p><strong>Distanz:</strong> ${distKm} km</p>
-                <p><strong>Dauer:</strong> ${timeMin} min</p>
-                <p><strong>Pace:</strong> ${pace} min/km</p>
+        lastRuns.forEach(run => {
+            const distKm = (run.distance / 1000).toFixed(2);
+            const timeMin = Math.round(run.moving_time / 60);
+
+            /* Pace korrekt als mm:ss berechnen */
+            const paceSeconds = run.moving_time / (run.distance / 1000);
+            const paceMin = Math.floor(paceSeconds / 60);
+            const paceSec = Math.round(paceSeconds % 60);
+            const paceFormatted = `${paceMin}:${paceSec.toString().padStart(2, "0")}`;
+
+            const date = new Date(run.start_date).toLocaleDateString("de-DE");
+
+            latestRunBox.innerHTML += `
+                <div class="run-card">
+                    <h4>${date}</h4>
+                    <p><strong>Distanz:</strong> ${distKm} km</p>
+                    <p><strong>Dauer:</strong> ${timeMin} min</p>
+                    <p><strong>Pace:</strong> ${paceFormatted} min/km</p>
+                </div>
             `;
-        }
+        });
 
-        /* === Wochenkilometer für Chart === */
+        /* ======== WOCHENCHART ======== */
         const weekData = Array(7).fill(0);
         const today = new Date();
 
@@ -178,10 +191,47 @@ async function loadStravaData() {
                 labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
                 datasets: [{
                     label: "Kilometer",
-                    data: weekData
+                    data: weekData,
+                    backgroundColor: "rgba(0, 119, 255, 0.6)",
+                    hoverBackgroundColor: "rgba(0, 119, 255, 0.9)",
+                    borderRadius: 8,
+                    borderSkipped: false
                 }]
             },
-            options: { responsive: true }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: "#1e293b",
+                        titleColor: "#ffffff",
+                        bodyColor: "#ffffff",
+                        cornerRadius: 6,
+                        padding: 10,
+                        displayColors: false
+                    }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: "rgba(0, 0, 0, 0.06)" },
+                        ticks: {
+                            color: "#1e293b",
+                            font: { size: 12 }
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            color: "#1e293b",
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
         });
 
     } catch (err) {
@@ -190,5 +240,6 @@ async function loadStravaData() {
     }
 }
 
+/* ============ Event Listener ============ */
 document.addEventListener("DOMContentLoaded", loadStravaData);
 
