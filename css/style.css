@@ -1,155 +1,160 @@
-/* ===============================
-   VARIABLEN & GRUNDLAYOUT
-=============================== */
+/* =========================================================
+   GLOBAL VARIABLES & RESET
+========================================================= */
 :root {
+  /* Colors */
   --clr-bg: #f0f4f8;
   --clr-surface: #ffffff;
   --clr-text: #1e293b;
   --clr-primary: #2196f3;
   --clr-primary-light: #64b5f6;
 
+  /* UI Tokens */
   --radius: 10px;
   --shadow: 0 2px 8px rgba(0,0,0,0.08);
   --max-width: 900px;
 
+  /* Fonts */
   --font-main: "Montserrat", sans-serif;
   --font-heading: "Manrope", sans-serif;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   font-family: var(--font-main);
   font-size: 16px;
   line-height: 1.5;
+  background: var(--clr-bg);
   color: var(--clr-text);
-  background-color: var(--clr-bg);
   scroll-behavior: smooth;
 }
 
-/* ===============================
+/* =========================================================
    HEADER / NAVIGATION
-=============================== */
+========================================================= */
 .header {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
-  z-index: 1000;
   background: transparent;
+  z-index: 1000;
   transition: transform 0.4s ease;
 }
 
 .header::after {
   content: "";
   position: absolute;
-  bottom: 0;
   left: 50%;
-  width: 0;
+  bottom: 0;
   height: 1px;
-  background: rgba(255, 255, 255, 0.6);
+  width: 0;
+  background: rgba(255,255,255,0.6);
   transform: translateX(-50%);
   transition: width 0.6s ease;
 }
 
-.header.scrolled::after { width: 90%; }
-.header.hide { transform: translateY(-100%); }
+.header.scrolled::after {
+  width: 90%;
+}
 
-/* Logo */
+.header.hide {
+  transform: translateY(-100%);
+}
+
 .logo {
   position: absolute;
   left: 2rem;
 }
 .logo img {
   height: 80px;
-  width: auto;
-  display: block;
   border-radius: 4px;
   transition: transform 0.25s ease;
 }
-.logo img:hover { transform: scale(1.05); }
+.logo img:hover {
+  transform: scale(1.05);
+}
 
-/* Navigation */
 nav ul {
   display: flex;
   gap: 2rem;
   list-style: none;
 }
+
 nav a {
-  color: white;
-  text-decoration: none;
+  color: #fff;
   font-weight: 600;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
+  text-decoration: none;
+  padding: .5rem 1rem;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: .3s ease;
 }
+
 nav a:hover {
-  background-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.2);
   transform: translateY(-2px);
 }
 
-/* ===============================
+/* Mobile nav button */
+.nav-toggle {
+  display: none;
+  position: absolute;
+  right: 2rem;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================================================
    HERO SECTION
-=============================== */
+========================================================= */
 #hero {
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+
   background: linear-gradient(135deg, #2196f3, #64b5f6);
   background-size: 200% 200%;
   animation: gradientMove 12s ease infinite;
-  padding:0 2rem;
+
+  padding: 0 2rem;
 }
 
 @keyframes gradientMove {
-  0% { background-position:0% 50%; }
-  50% { background-position:100% 50%; }
-  100% { background-position:0% 50%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 #hero h1 {
-  font-size: clamp(2rem,6vw,5rem);
   font-family: var(--font-heading);
-  font-weight:700;
-  margin-bottom:1rem;
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 5rem);
+  margin-bottom: 1rem;
 }
 
 #hero p {
-  font-size: clamp(1rem,2vw,1.5rem);
-  margin-bottom:2rem;
+  font-size: clamp(1rem, 2vw, 1.5rem);
   color: rgba(255,255,255,0.85);
 }
 
-/* ===============================
-   BUTTONS
-=============================== */
-.btn-primary {
-  background-color:white;
-  color: var(--clr-primary);
-  padding:0.75rem 1.5rem;
-  border-radius:50px;
-  font-weight:600;
-  text-decoration:none;
-  transition: all 0.3s ease;
-}
-.btn-primary:hover {
-  background-color: var(--clr-primary);
-  color:white;
-  transform: translateY(-3px);
-}
-
-/* ===============================
-   SECTIONS
-=============================== */
+/* =========================================================
+   MAIN SECTIONS & CARDS
+========================================================= */
 main {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -157,23 +162,15 @@ main {
 }
 
 section {
-  background-color: var(--clr-surface);
-  padding:3rem 1.5rem;
-  border-radius: var(--radius);
-  margin-bottom:2rem;
-  box-shadow: var(--shadow);
-}
-
-.card {
   background: var(--clr-surface);
-  padding: 2rem;
+  padding: 3rem 1.5rem;
+  margin-bottom: 2rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
 .section-accent {
   position: relative;
-  overflow: visible;
 }
 
 .section-accent::before {
@@ -185,18 +182,19 @@ section {
   width: clamp(80px, 20%, 300px);
   height: 3px;
   border-radius: 999px;
+
   background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light));
   box-shadow: 0 4px 10px rgba(33,150,243,0.12);
 }
 
 h2 {
   font-family: var(--font-heading);
-  margin-bottom:1.5rem;
+  margin-bottom: 2rem;
 }
 
-/* ===============================
-   ABOUT
-=============================== */
+/* =========================================================
+   ABOUT SECTION
+========================================================= */
 .about-grid {
   display: grid;
   grid-template-columns: minmax(120px, 1fr) 2fr;
@@ -204,256 +202,140 @@ h2 {
   align-items: center;
 }
 
-.profile { text-align:center; }
+.profile {
+  text-align: center;
+}
 
 .profile-pic {
   width: 160px;
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: var(--shadow);
   border: 4px solid rgba(0,122,204,0.1);
-  transition: transform 250ms ease;
-  margin: 0 auto;
+  box-shadow: var(--shadow);
+  transition: transform .25s ease;
 }
-.profile-pic:hover { transform: translateY(-6px) rotate(-1deg); }
 
-.muted { color:#6b7280; font-size:0.85rem; }
+.profile-pic:hover {
+  transform: translateY(-6px) rotate(-1deg);
+}
 
-/* ===============================
+.muted {
+  font-size: .85rem;
+  color: #6b7280;
+}
+
+/* =========================================================
    SKILLS
-=============================== */
+========================================================= */
 .skills-list {
-  list-style:none;
-  display:flex;
-  flex-wrap:wrap;
-  gap:0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
 }
-.skills-list li {
-  padding: 0.5rem 0.8rem;
-  border-radius: 12px;
+
+.skills-list span {
   background: rgba(33,150,243,0.12);
   color: var(--clr-primary);
   font-weight: 600;
-  font-size: 0.85rem;
+  padding: .5rem .8rem;
+  font-size: .85rem;
+  border-radius: 12px;
+  display: inline-block;
+  white-space: nowrap;
 }
 
-/* ===============================
-   FOOTER
-=============================== */
-footer {
-  text-align:center;
-  padding:2rem;
-  color:#777;
-  font-size:0.9rem;
-}
-
-/* ===============================
-   BACK TO TOP BUTTON
-=============================== */
-#backToTop {
-  position:fixed;
-  bottom:25px; right:25px;
-  background: var(--clr-primary);
-  color:white;
-  border:none;
-  border-radius:50%;
-  width:48px; height:48px;
-  font-size:1.4rem;
-  cursor:pointer;
-  opacity:0;
-  pointer-events:none;
-  box-shadow: var(--shadow);
-  transition: all 0.3s ease;
-}
-#backToTop.show { opacity:0.9; pointer-events:auto; }
-#backToTop:hover {
-  background: var(--clr-primary-light);
-  transform: translateY(-3px);
-}
-
-/* ===============================
-   MOBILE NAVIGATION
-=============================== */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 1200;
-  position: absolute;
-  right: 2rem;
-}
-.nav-toggle.active { transform: rotate(90deg); }
-
-@media (max-width: 768px) {
-
-  .header::after { display: none; }
-  .nav-toggle { display: block; }
-
-  nav ul {
-    position: fixed;
-    inset: 0;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    background: rgba(33,150,243,0.95);
-    backdrop-filter: blur(8px);
-    opacity:0;
-    pointer-events:none;
-    transform: scale(1.05);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-  }
-
-  nav ul.show {
-    opacity:1;
-    pointer-events:all;
-    transform: scale(1);
-  }
-
-  nav a {
-    font-size:1.6rem;
-    font-weight:500;
-    color:#fff;
-  }
-
-  .about-grid {
-    grid-template-columns: 1fr;
-    text-align:center;
-  }
-}
-
-@media (min-width: 769px) {
-  nav ul {
-    opacity: 1 !important;
-    transform: none !important;
-    pointer-events: all !important;
-    position: static;
-  }
-  .nav-toggle { display:none !important; }
-}
-
-/* ===============================
-   RESPONSIVE TWEAKS
-=============================== */
-@media (max-width: 480px) {
-  #hero h1 { font-size: clamp(1.5rem, 5vw, 3rem); }
-  #hero p { font-size: clamp(0.9rem, 2vw, 1.2rem); }
-  .profile-pic { width: 120px; height:120px; }
-}
-
-/* ===============================
+/* =========================================================
    RUNNING SECTION
-=============================== */
+========================================================= */
 
-#running h2 {
-  text-align: left;
-  font-family: var(--font-heading);
-  margin-bottom: 1.5rem;
-}
-
-/* GRID FOR RUN CARDS */
 #latest-run {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
-  width: 100%;
 }
 
-/* Run Card */
+/* Run card */
 .run-card {
   background: var(--clr-surface);
   padding: 1.3rem 1.4rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: .15s ease;
 }
+
 .run-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
-/* Run Title */
 .run-title {
   font-family: var(--font-heading);
   font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  color: var(--clr-text);
+  margin-bottom: .25rem;
 }
 
-/* Date */
 .run-date {
-  font-size: 0.95rem;
-  opacity: 0.7;
-  margin-bottom: 0.9rem;
+  opacity: .7;
+  margin-bottom: .9rem;
 }
 
-/* Rows */
+/* Run rows */
 .run-row {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  margin-bottom: 0.45rem;
-  font-size: 0.95rem;
+  gap: .35rem;
   color: var(--clr-text);
+  margin-bottom: .45rem;
 }
 
-/* Icons */
+/* SVG icons */
 .run-row .icon {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 1.1rem;
   height: 1.1rem;
   color: var(--clr-primary);
 }
 .run-row .icon svg {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-/* Separator Dot */
 .run-row .dot {
-  opacity: 0.4;
-  margin: 0 0.2rem;
+  opacity: .4;
+  margin: 0 .2rem;
 }
 
-/* Updated Timestamp */
 .run-updated {
-  font-size: 0.75rem;
-  opacity: 0.6;
-  margin-top: 0.7rem;
+  margin-top: .7rem;
+  opacity: .6;
+  font-size: .75rem;
 }
 
-/* ===============================
-   WEEKLY CHART – STRAVA STYLE
-=============================== */
-
+/* =========================================================
+   WEEKLY CHART CARD
+========================================================= */
 .chart-title {
   font-family: var(--font-heading);
   font-size: 1.35rem;
-  font-weight: 600;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-  color: var(--clr-text);
+  margin: 2.5rem 0 1rem 0;
 }
 
-/* Chart Card Wrapper */
 .chart-card {
+  padding: 1.5rem;
   background: var(--clr-surface);
   border-radius: 14px;
   box-shadow: var(--shadow);
-  padding: 1.5rem;
-  margin-bottom: 3rem;     /* Abstand zum Footer bzw. next section */
   position: relative;
   overflow: hidden;
+  margin-bottom: 3rem;
 }
 
-/* Subtle Strava grid (only visible because it's on the wrapper, not canvas) */
+/* Subtle performance-grid overlay */
 .chart-card::before {
   content: "";
   position: absolute;
@@ -462,7 +344,7 @@ footer {
     linear-gradient(90deg, rgba(33,150,243,0.05) 1px, transparent 1px),
     linear-gradient(180deg, rgba(33,150,243,0.04) 1px, transparent 1px);
   background-size: 40px 40px;
-  opacity: 0.4;
+  opacity: .4;
   pointer-events: none;
 }
 
@@ -472,23 +354,91 @@ footer {
   display: block;
 }
 
-/* Chart Hover Effect */
-.chart-card:hover {
-  box-shadow: 0 6px 20px rgba(33,150,243,0.18);
-  transition: box-shadow 0.25s ease;
+/* =========================================================
+   FOOTER
+========================================================= */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: #777;
+}
+
+/* =========================================================
+   BACK TO TOP BUTTON
+========================================================= */
+#backToTop {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+
+  background: var(--clr-primary);
+  color: white;
+  border-radius: 50%;
+  border: none;
+
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+
+  box-shadow: var(--shadow);
+  transition: .3s ease;
+}
+
+#backToTop.show {
+  opacity: .9;
+  pointer-events: auto;
+}
+
+#backToTop:hover {
+  background: var(--clr-primary-light);
+  transform: translateY(-3px);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 768px) {
+  .nav-toggle { display: block; }
+
+  nav ul {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(33,150,243,0.95);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.08);
+    transition: .4s;
+  }
+
+  nav ul.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+
+  nav a {
+    font-size: 1.6rem;
+    color: #fff;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  #weeklyChart {
+    height: 240px !important;
+  }
 }
 
 @media (max-width: 480px) {
-  #weeklyChart { height: 240px !important; }
-  .chart-title { margin-top: 2rem; }
-}
-
-/* Better spacing for section headings */
-#running h2 {
-  margin-bottom: 2rem;     /* mehr Luft! */
-}
-
-.chart-title {
-  margin-top: 2.5rem !important;
-  margin-bottom: 1rem !important;
+  #hero h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+  }
 }

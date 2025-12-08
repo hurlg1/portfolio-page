@@ -5,150 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Portfolio - Gian-Luca</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-  <!-- Header / Navigation -->
-  <header class="header">
-    <a href="#hero" class="logo">
-      <img src="img/logo.png" alt="Logo Gian-Luca">
-    </a>
+<header class="header">
+  <a href="#hero" class="logo">
+    <img src="img/logo.png" alt="Logo Gian-Luca">
+  </a>
 
-    <button class="nav-toggle" aria-label="Menü öffnen">☰</button>
+  <button class="nav-toggle" aria-label="Menü öffnen">☰</button>
 
-    <nav>
-      <ul class="nav">
-        <li><a href="#about">Über mich</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#running">Running</a></li>
-        <li><a href="#contact">Kontakt</a></li>
-      </ul>
-    </nav>
-  </header>
+  <nav>
+    <ul>
+      <li><a href="#about">Über mich</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#running">Running</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- Hero -->
-  <section id="hero">
-    <div class="hero-content">
-      <h1>Gian-Luca Hürlimann</h1>
-      <p>Student Digital Business &amp; AI</p>
+<section id="hero">
+  <h1>Gian-Luca Hürlimann</h1>
+  <p>Student Digital Business &amp; AI</p>
+</section>
+
+<main>
+
+  <!-- ABOUT -->
+  <section id="about" class="section-accent card">
+    <h2>Über mich</h2>
+
+    <div class="about-grid">
+      <figure class="profile">
+        <img src="img/profile.jpg" alt="Mein Foto" class="profile-pic">
+        <figcaption>
+          <strong>Gian-Luca Hürlimann</strong>
+          <div class="muted">BSc Digital Business &amp; AI</div>
+        </figcaption>
+      </figure>
+
+      <div class="about-content">
+        <p>Hi 😊 Ich bin Gian-Luca, Student an der BFH und versuche aktuell das Modul EWEB zu meistern. 
+        Auf dieser Seite erfährst du ein paar mehr oder weniger interessante Dinge über mich. Falls nicht, entschuldige bitte.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Main Content -->
-  <main>
-    <section id="about" class="section-accent card">
-      <h2>Über mich</h2>
-      <div class="about-grid">
-        <figure class="profile">
-          <img src="img/profile.jpg" alt="Mein Foto" class="profile-pic">
-          <figcaption>
-            <strong>Gian-Luca Hürlimann</strong>
-            <div class="muted">BSc Digital Business &amp; AI</div>
-          </figcaption>
-        </figure>
-        <div class="about-content">
-          <p>Hi 😊 Ich bin Gian-Luca, Student an der BFH und versuche aktuell das Modul EWEB zu meistern. 
-          Auf dieser Seite erfährst du ein paar mehr oder weniger interessante Dinge über mich. Falls nicht, entschuldige bitte.</p>
-        </div>
-      </div>
-    </section>
+  <!-- SKILLS -->
+  <section id="skills" class="card section-accent">
+    <h2>Skills</h2>
+    <div class="skills-list">
+  <span>coding basics</span>
+  <span>adobe photoshop</span>
+  <span>kochen</span>
+  <span>adobe after effects</span>
+  <span>kreuzworträtsel</span>
+  <span>mit katzen spielen</span>
+  <span>schlafen</span>
+  <span>gaming-pcs bauen</span>
+</div>
 
-    <section id="skills" class="card section-accent">
-      <h2>Skills</h2>
-      <ul class="skills-list">
-        <li>coding basics</li><li>adobe photoshop</li><li>kochen</li><li>adobe after effects</li><li>kreuzworträtsel</li><li>mit katzen spielen</li><li>schlafen</li><li>gaming-pcs bauen</li>
-      </ul>
-    </section>
+  </section>
 
+  <!-- RUNNING -->
   <section id="running" class="card section-accent">
     <h2>Running</h2>
     <h3>Latest Runs</h3>
 
     <div id="latest-run"></div>
 
+    <!-- TEMPLATE -->
     <template id="run-template">
-    <div class="run-card">
+      <div class="run-card">
         <h4 class="run-title"></h4>
         <p class="run-date"></p>
 
-        <!-- DISTANZ + HÖHENMETER -->
         <div class="run-row">
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></svg>
+          </span>
+          <span class="run-distance"></span>
+          <span class="dot">·</span>
 
-            <!-- DISTANZ Icon -->
-            <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Location marker (rounded, modern) -->
-                    <circle cx="12" cy="7" r="3" />
-                    <path d="M5 21c0-4 3-7 7-7s7 3 7 7" />
-                </svg>
-            </span>
-            <span class="run-distance"></span>
-
-            <span class="dot">·</span>
-
-            <!-- HÖHENMETER Icon -->
-            <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Smooth mountain peak -->
-                    <path d="M3 18l7-12 4 8 3-4 4 8H3z" />
-                </svg>
-            </span>
-            <span class="run-elevation"></span>
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><path d="M3 18l7-12 4 8 3-4 4 8z"/></svg>
+          </span>
+          <span class="run-elevation"></span>
         </div>
 
-        <!-- DAUER + PACE -->
         <div class="run-row">
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </span>
+          <span class="run-duration"></span>
+          <span class="dot">·</span>
 
-            <!-- DAUER Icon -->
-            <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Rounded clock -->
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M12 7v5l3 2" />
-                </svg>
-            </span>
-            <span class="run-duration"></span>
-
-            <span class="dot">·</span>
-
-            <!-- PACE Icon -->
-            <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Direction arrow (running pace) -->
-                    <path d="M5 12h14" />
-                    <path d="M13 6l6 6-6 6" />
-                </svg>
-            </span>
-            <span class="run-pace"></span>
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+          <span class="run-pace"></span>
         </div>
+      </div>
+    </template>
+
+    <h3 class="chart-title">Weekly Distance</h3>
+
+    <div class="chart-card">
+      <canvas id="weeklyChart"></canvas>
     </div>
-</template>
-<h3 class="chart-title">Weekly Distance</h3>
 
-<div class="chart-card">
-    <canvas id="weeklyChart"></canvas>
-</div>
+    <p id="run-updated" class="run-updated"></p>
+  </section>
 
-<p id="run-updated" class="run-updated"></p>
+</main>
 
-</section>
-  </main>
+<footer>
+  <p>&copy; 2025 Gian-Luca Hürlimann</p>
+</footer>
 
-  <footer>
-    <p>&copy; 2025 Gian-Luca Hürlimann</p>
-  </footer>
+<button id="backToTop">↑</button>
 
-  <button id="backToTop" aria-label="Nach oben">↑</button>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
