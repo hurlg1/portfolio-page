@@ -430,77 +430,65 @@ footer {
 }
 
 /* ===============================
-   WEEKLY CHART STYLING
+   WEEKLY CHART – STRAVA STYLE
 =============================== */
-#weeklyChart {
-  width: 100%;
-  height: 320px;
-  padding: 1.2rem;
-  display: block;
 
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(245, 248, 255, 0.9) 100%
-  );
-
-  border-radius: 14px;
-  box-shadow:
-      0 3px 6px rgba(0,0,0,0.08),
-      0 8px 18px rgba(33,150,243,0.15);
-
-  border: 1px solid rgba(33,150,243,0.08);
-
-  margin: 2rem auto 0;
-}
-
-/* Subheadline above the chart */
 .chart-title {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
-  font-weight: 650;
-  margin: 1.5rem 0 1rem 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
   color: var(--clr-text);
-  letter-spacing: 0.3px;
 }
 
-/* Ensure canvas shapes scale node-clean */
-canvas#weeklyChart {
-  width: 100% !important;
-  height: 100% !important;
-  border-radius: 12px;
+/* Chart Card Wrapper */
+.chart-card {
+  background: var(--clr-surface);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 3rem;     /* Abstand zum Footer bzw. next section */
+  position: relative;
+  overflow: hidden;
 }
 
-/* Hover effect – soft Strava glow */
-#weeklyChart:hover {
-  filter: drop-shadow(0 4px 12px rgba(33,150,243,0.25));
-  transition: filter 0.3s ease;
-}
-
-/* Optional: subtle sport-grid background */
-#weeklyChart {
+/* Subtle Strava grid (only visible because it's on the wrapper, not canvas) */
+.chart-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background-image:
-    linear-gradient(
-      90deg,
-      rgba(33,150,243,0.05) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      180deg,
-      rgba(33,150,243,0.04) 1px,
-      transparent 1px
-    );
+    linear-gradient(90deg, rgba(33,150,243,0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(33,150,243,0.04) 1px, transparent 1px);
   background-size: 40px 40px;
-  background-blend-mode: overlay;
-  opacity: 0.98;
+  opacity: 0.4;
+  pointer-events: none;
 }
 
-/* On mobile: keep proportions controlled */
+#weeklyChart {
+  width: 100% !important;
+  height: 320px !important;
+  display: block;
+}
+
+/* Chart Hover Effect */
+.chart-card:hover {
+  box-shadow: 0 6px 20px rgba(33,150,243,0.18);
+  transition: box-shadow 0.25s ease;
+}
+
 @media (max-width: 480px) {
-  #weeklyChart {
-    height: 240px;
-    padding: 0.8rem;
-    border-radius: 12px;
-  }
+  #weeklyChart { height: 240px !important; }
+  .chart-title { margin-top: 2rem; }
 }
 
+/* Better spacing for section headings */
+#running h2 {
+  margin-bottom: 2rem;     /* mehr Luft! */
+}
+
+.chart-title {
+  margin-top: 2.5rem !important;
+  margin-bottom: 1rem !important;
+}
