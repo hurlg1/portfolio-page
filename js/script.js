@@ -138,7 +138,7 @@ async function loadStravaData() {
 /* ======== LETZTE 5 LÄUFE ======== */
 const lastRuns = activities
     .filter(a => a.type === "Run")
-    .slice(0, 5);
+    .slice(0, 8);
 
 latestRunBox.innerHTML = ""; // container leeren
 
@@ -186,9 +186,18 @@ lastRuns.forEach(run => {
     latestRunBox.appendChild(clone);
 });
 
-/* ===== Zuletzt aktualisiert ===== */
+/* ===== Zuletzt aktualisiert: letzte Aktivität ===== */
+const latestActivityDate = new Date(activities[0].start_date).toLocaleString("de-DE", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit"
+});
+
 document.getElementById("run-updated").textContent =
-    "Zuletzt aktualisiert: " + new Date().toLocaleString("de-DE");
+  `Zuletzt Aktualisiert: ${latestActivityDate}`;
+
 
         /* ======== WOCHENCHART ======== */
         const weekData = Array(7).fill(0);
