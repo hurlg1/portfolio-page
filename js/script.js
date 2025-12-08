@@ -176,14 +176,16 @@ function renderLastUpdated(activities) {
    WEEKLY CHART
 ========================================================= */
 function renderWeeklyChart(activities, canvas) {
-  const weekData = Array(7).fill(0);
-  const today = new Date();
+const weekData = Array(7).fill(0);
 
-  activities.forEach(a => {
-    if (a.type !== "Run") return;
-    const diff = Math.floor((today - new Date(a.start_date)) / 86400000);
-    if (diff < 7) weekData[6 - diff] += a.distance / 1000;
-  });
+activities.forEach(a => {
+  if (a.type !== "Run") return;
+
+  const day = new Date(a.start_date).getDay();
+  const dayIndex = (day + 6) % 7; // Montag = 0 ... Sonntag = 6
+
+  weekData[dayIndex] += a.distance / 1000;
+});
 
   new Chart(canvas, {
     type: "bar",

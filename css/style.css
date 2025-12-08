@@ -316,6 +316,16 @@ h2 {
   font-size: .75rem;
 }
 
+#running h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+#running h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
 /* =========================================================
    WEEKLY CHART CARD
 ========================================================= */
