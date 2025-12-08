@@ -209,6 +209,12 @@ function renderWeeklyChart(activities, canvas) {
       kmData[index] += run.distance / 1000;
     }
   });
+// Wochentotal berechnen
+const totalKm = kmData.reduce((a, b) => a + b, 0);
+
+// Formatieren auf zwei Nachkommastellen
+document.getElementById("weekly-total").textContent =
+    `Total: ${totalKm.toFixed(2)} km`;
 
   // Farben (dein Blau)
   const lineColor = "rgba(33,150,243,1)";
