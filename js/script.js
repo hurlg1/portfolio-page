@@ -71,7 +71,7 @@ function cacheData(key, fallback) {
 }
 
 /* ABOUT + SKILLS */
-const aboutContentEl = document.querySelector("#about .about-content p");
+const aboutContentEl = document.querySelector("#about .about-right p");
 const skillsListEl = document.querySelector("#skills .skills-list");
 
 const skills = cacheData(
