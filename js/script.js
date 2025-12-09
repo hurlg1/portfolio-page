@@ -1,42 +1,4 @@
 /* =========================================================
-   NAVIGATION
-========================================================= */
-const navToggle = document.querySelector(".nav-toggle");
-const navMenu = document.querySelector("nav ul");
-
-navToggle.addEventListener("click", () => {
-  navToggle.classList.toggle("active");
-  navMenu.classList.toggle("show");
-});
-
-document.addEventListener("click", (e) => {
-  if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-    navMenu.classList.remove("show");
-    navToggle.classList.remove("active");
-  }
-});
-
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 768) {
-    navMenu.classList.remove("show");
-    navToggle.classList.remove("active");
-  }
-});
-
-/* =========================================================
-   BACK TO TOP BUTTON
-========================================================= */
-const backToTop = document.getElementById("backToTop");
-
-window.addEventListener("scroll", () => {
-  backToTop.classList.toggle("show", window.scrollY > 300);
-});
-
-backToTop.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
-/* =========================================================
    HEADER SCROLL BEHAVIOR
 ========================================================= */
 const header = document.querySelector(".header");
