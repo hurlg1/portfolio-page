@@ -70,8 +70,7 @@ function cacheData(key, fallback) {
   return fallback;
 }
 
-/* ABOUT + SKILLS */
-const aboutContentEl = document.querySelector("#about .about-right p");
+/* SKILLS ONLY – About bleibt statisch */
 const skillsListEl = document.querySelector("#skills .skills-list");
 
 const skills = cacheData(
@@ -84,7 +83,6 @@ skillsListEl.innerHTML = skills.map(skill => `<span>${skill}</span>`).join("");
 /* =========================================================
    STRAVA DATA HANDLING
 ========================================================= */
-
 async function loadStravaData() {
   const latestRunBox = document.getElementById("latest-run");
   const chartCanvas = document.getElementById("weeklyChart");
@@ -181,11 +179,9 @@ function renderWeeklyChart(activities, canvas) {
   const DAYS = 7;
   const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
-  // "Heute" nur als Datum (00:00 Uhr)
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  // Labels & Daten vorbereiten (ältester Tag links)
   const dayNames = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
   const labels = [];
   const kmData = new Array(DAYS).fill(0);
@@ -195,59 +191,49 @@ function renderWeeklyChart(activities, canvas) {
     labels.push(dayNames[d.getDay()]);
   }
 
-  // Läufe der letzten 7 Tage einsortieren
   activities.forEach(run => {
     if (run.type !== "Run") return;
 
     const raw = new Date(run.start_date_local || run.start_date);
-    const runDate = new Date(raw.getFullYear(), raw.getMonth(), raw.getDate()); // Uhrzeit weg
-
+    const runDate = new Date(raw.getFullYear(), raw.getMonth(), raw.getDate());
     const diffDays = Math.round((today - runDate) / MS_PER_DAY);
 
     if (diffDays >= 0 && diffDays < DAYS) {
-      const index = DAYS - 1 - diffDays; // ältester links, neuester rechts
+      const index = DAYS - 1 - diffDays;
       kmData[index] += run.distance / 1000;
     }
   });
-// Wochentotal berechnen
-const totalKm = kmData.reduce((a, b) => a + b, 0);
 
-// Gesamtzeit der letzten 7 Tage berechnen
-let totalTimeSec = 0;
+  // Wochentotal & Gesamtzeit
+  const totalKm = kmData.reduce((a, b) => a + b, 0);
+  let totalTimeSec = 0;
 
-activities.forEach(run => {
+  activities.forEach(run => {
     if (run.type !== "Run") return;
 
     const rawDate = new Date(run.start_date_local || run.start_date);
     const runDate = new Date(rawDate.getFullYear(), rawDate.getMonth(), rawDate.getDate());
-
     const diffDays = Math.round((today - runDate) / MS_PER_DAY);
 
     if (diffDays >= 0 && diffDays < DAYS) {
-        totalTimeSec += run.moving_time;
+      totalTimeSec += run.moving_time;
     }
-});
+  });
 
-// Formatierung der Zeit
-const hours = Math.floor(totalTimeSec / 3600);
-const minutes = Math.floor((totalTimeSec % 3600) / 60);
+  const hours = Math.floor(totalTimeSec / 3600);
+  const minutes = Math.floor((totalTimeSec % 3600) / 60);
 
-const formattedTime =
-    hours > 0
-        ? `${hours}h ${minutes.toString().padStart(2, "0")}m`
-        : `${minutes}m`;
+  const formattedTime =
+    hours > 0 ? `${hours}h ${minutes.toString().padStart(2, "0")}m` : `${minutes}m`;
 
-// Ausgabe
-document.getElementById("weekly-total").textContent =
+  document.getElementById("weekly-total").textContent =
     `Total: ${totalKm.toFixed(2)} km · Time: ${formattedTime}`;
 
-  // Farben (dein Blau)
   const lineColor = "rgba(33,150,243,1)";
   const gradient = ctx.createLinearGradient(0, 0, 0, 300);
   gradient.addColorStop(0, "rgba(33,150,243,0.25)");
   gradient.addColorStop(1, "rgba(33,150,243,0)");
 
-  // Falls schon ein Chart existiert → zerstören
   if (window.weeklyChartInstance) {
     window.weeklyChartInstance.destroy();
   }
@@ -272,7 +258,7 @@ document.getElementById("weekly-total").textContent =
       responsive: true,
       plugins: {
         legend: { display: false },
-        tooltip: { enabled: false } // kein Hover
+        tooltip: { enabled: false }
       },
       scales: {
         x: {
@@ -293,13 +279,6 @@ document.getElementById("weekly-total").textContent =
       }
     }
   });
-}
-
-// Helfer: CSS-Variable im JS verwenden
-function varPrimary() {
-  return getComputedStyle(document.documentElement)
-    .getPropertyValue("--clr-primary")
-    .trim();
 }
 
 /* =========================================================

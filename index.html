@@ -11,92 +11,109 @@
 
 <body>
 <header class="header">
-  <a href="#hero" class="logo">
-    <img src="img/logo.png" alt="Logo Gian-Luca">
-  </a>
+  <div class="nav-shell">
+    <a href="#hero" class="logo">
+      <img src="img/logo.png" alt="Logo Gian-Luca">
+    </a>
 
-  <button class="nav-toggle" aria-label="Menü öffnen">☰</button>
+    <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">Über mich</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#running">Running</a></li>
+      </ul>
+    </nav>
 
-  <nav>
-    <ul>
-      <li><a href="#about">Über mich</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#running">Running</a></li>
-      <li><a href="#contact">Kontakt</a></li>
-    </ul>
-  </nav>
+    <button class="nav-toggle" aria-label="Menü öffnen">☰</button>
+  </div>
 </header>
 
 <section id="hero">
-  <h1>Gian-Luca Hürlimann</h1>
-  <p>Student Digital Business &amp; AI</p>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-avatar">
+        <img src="img/profile.jpg" alt="Portrait von Gian-Luca">
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <p class="hero-kicker">BSc Digital Business &amp; AI, BFH</p>
+      <h1>GIAN-LUCA</h1>
+      <p class="hero-subtitle">
+        Projektleiter IT und Student im Bereich Digital Business &amp; AI.
+        Ich mag gutes Essen, meine Katze und ein paar Kilometer auf Strava.
+      </p>
+      <div class="hero-actions">
+        <a href="#about" class="btn-primary">Mehr über mich</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <main>
 
   <section id="about" class="section-accent card">
-  <h2>Über mich</h2>
+    <h2>Über mich</h2>
 
-  <!-- TOP: Profil + Text -->
-  <div class="about-grid">
-    <figure class="profile">
-      <img src="img/profile.jpg" alt="Mein Foto" class="profile-pic">
-      <figcaption>
-        <strong>Gian-Luca Hürlimann</strong>
-        <div class="muted">BSc Digital Business &amp; AI</div>
-      </figcaption>
-    </figure>
+    <!-- TOP: Profil + Text -->
+    <div class="about-grid">
+      <figure class="profile">
+        <img src="img/profile.jpg" alt="Mein Foto" class="profile-pic">
+        <figcaption>
+          <strong>Gian-Luca Hürlimann</strong>
+          <div class="muted">BSc Digital Business &amp; AI</div>
+        </figcaption>
+      </figure>
 
-    <div class="about-content">
-      <p>Hi 😊 Ich bin Gian-Luca, Student an der BFH und versuche aktuell das Modul EWEB zu meistern. 
-      Auf dieser Seite erfährst du ein paar mehr oder weniger interessante Dinge über mich. Falls nicht, entschuldige bitte.</p>
-    </div>
-  </div>
-
-  <!-- DIVIDER (optional, sehr subtil & schön) -->
-  <hr class="about-divider">
-
-  <!-- BOTTOM: Ausbildung + Berufserfahrung -->
-  <div class="about-cv-grid">
-
-    <div>
-      <h3>Ausbildung</h3>
-      <ul>
-        <li>1.–9. Klasse, Solothurn</li>
-        <li>10. Schuljahr, BVS Burgdorf</li>
-        <li>System Engineer EFZ, Talus Informatik AG</li>
-        <li>Gestalterische Berufsmaturität, gibb Bern</li>
-        <li>BSc Digital Business &amp; AI, BFH Bern</li>
-      </ul>
+      <div class="about-content">
+        <p>Hi 😊 Ich bin Gian-Luca, Student an der BFH und versuche aktuell das Modul EWEB zu meistern. 
+        Auf dieser Seite erfährst du ein paar mehr oder weniger interessante Dinge über mich. Falls nicht, entschuldige bitte.</p>
+      </div>
     </div>
 
-    <div>
-      <h3>Berufserfahrung</h3>
-      <ul>
-        <li>System Engineer, Stadt Burgdorf (2018–2025)</li>
-        <li>Projektleiter IT, Stadt Burgdorf (2025–heute)</li>
-      </ul>
+    <hr class="about-divider">
+
+    <!-- BOTTOM: Ausbildung + Berufserfahrung -->
+    <div class="about-cv-grid">
+
+      <div>
+        <h3>Ausbildung</h3>
+        <ul>
+          <li>1.–9. Klasse, Solothurn</li>
+          <li>10. Schuljahr, BVS Burgdorf</li>
+          <li>System Engineer EFZ, Talus Informatik AG</li>
+          <li>Gestalterische Berufsmaturität, gibb Bern</li>
+          <li>BSc Digital Business &amp; AI, BFH Bern</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Berufserfahrung</h3>
+        <ul>
+          <li>System Engineer, Stadt Burgdorf (2018–2025)</li>
+          <li>Projektleiter IT, Stadt Burgdorf (2025–heute)</li>
+        </ul>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- SKILLS -->
   <section id="skills" class="card section-accent">
     <h2>Skills</h2>
     <div class="skills-list">
-  <span>wele skill</span>
-  <span>adobe photoshop</span>
-  <span>kochen</span>
-  <span>adobe after effects</span>
-  <span>kreuzworträtsel</span>
-  <span>mit katzen spielen</span>
-  <span>schlafen</span>
-  <span>gaming-pcs bauen</span>
-  <span>fussball spielen</span>
-  <span>pizza machen & essen</span>
-  <span>no 1 skill</span>
-</div>
-
+      <span>wele skill</span>
+      <span>adobe photoshop</span>
+      <span>kochen</span>
+      <span>adobe after effects</span>
+      <span>kreuzworträtsel</span>
+      <span>mit katzen spielen</span>
+      <span>schlafen</span>
+      <span>gaming-pcs bauen</span>
+      <span>fussball spielen</span>
+      <span>pizza machen &amp; essen</span>
+      <span>no 1 skill</span>
+    </div>
   </section>
 
   <!-- RUNNING -->
@@ -106,58 +123,54 @@
 
     <div id="latest-run"></div>
 
-<template id="run-template">
-  <div class="run-card">
-    <h4 class="run-title"></h4>
-    <p class="run-date"></p>
+    <template id="run-template">
+      <div class="run-card">
+        <h4 class="run-title"></h4>
+        <p class="run-date"></p>
 
-    <!-- DISTANZ + HÖHENMETER -->
-    <div class="run-row">
-      <!-- Distanz Icon -->
-      <span class="icon">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="7" r="3"/>
-          <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
-        </svg>
-      </span>
-      <span class="run-distance"></span>
+        <!-- DISTANZ + HÖHENMETER -->
+        <div class="run-row">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="7" r="3"/>
+              <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
+            </svg>
+          </span>
+          <span class="run-distance"></span>
 
-      <span class="dot">·</span>
+          <span class="dot">·</span>
 
-      <!-- Höhenmeter Icon -->
-      <span class="icon">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 18l7-12 4 8 3-4 4 8z"/>
-        </svg>
-      </span>
-      <span class="run-elevation"></span>
-    </div>
+          <span class="icon">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 18l7-12 4 8 3-4 4 8z"/>
+            </svg>
+          </span>
+          <span class="run-elevation"></span>
+        </div>
 
-    <!-- DAUER + PACE -->
-    <div class="run-row">
-      <!-- Dauer Icon -->
-      <span class="icon">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="9"/>
-          <path d="M12 7v5l3 2"/>
-        </svg>
-      </span>
-      <span class="run-duration"></span>
+        <!-- DAUER + PACE -->
+        <div class="run-row">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 2"/>
+            </svg>
+          </span>
+          <span class="run-duration"></span>
 
-      <span class="dot">·</span>
+          <span class="dot">·</span>
 
-      <!-- Pace Icon -->
-      <span class="icon">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14"/>
-          <path d="M13 6l6 6-6 6"/>
-        </svg>
-      </span>
-      <span class="run-pace"></span>
-    </div>
+          <span class="icon">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"/>
+              <path d="M13 6l6 6-6 6"/>
+            </svg>
+          </span>
+          <span class="run-pace"></span>
+        </div>
 
-  </div>
-</template>
+      </div>
+    </template>
 
     <h3>Last 7 Days</h3>
     <p id="weekly-total" class="weekly-total"></p>
