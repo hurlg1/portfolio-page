@@ -212,9 +212,34 @@ function renderWeeklyChart(activities, canvas) {
 // Wochentotal berechnen
 const totalKm = kmData.reduce((a, b) => a + b, 0);
 
-// Formatieren auf zwei Nachkommastellen
+// Gesamtzeit der letzten 7 Tage berechnen
+let totalTimeSec = 0;
+
+activities.forEach(run => {
+    if (run.type !== "Run") return;
+
+    const rawDate = new Date(run.start_date_local || run.start_date);
+    const runDate = new Date(rawDate.getFullYear(), rawDate.getMonth(), rawDate.getDate());
+
+    const diffDays = Math.round((today - runDate) / MS_PER_DAY);
+
+    if (diffDays >= 0 && diffDays < DAYS) {
+        totalTimeSec += run.moving_time;
+    }
+});
+
+// Formatierung der Zeit
+const hours = Math.floor(totalTimeSec / 3600);
+const minutes = Math.floor((totalTimeSec % 3600) / 60);
+
+const formattedTime =
+    hours > 0
+        ? `${hours}h ${minutes.toString().padStart(2, "0")}m`
+        : `${minutes}m`;
+
+// Ausgabe
 document.getElementById("weekly-total").textContent =
-    `Total: ${totalKm.toFixed(2)} km`;
+    `Total: ${totalKm.toFixed(2)} km · Time: ${formattedTime}`;
 
   // Farben (dein Blau)
   const lineColor = "rgba(33,150,243,1)";
