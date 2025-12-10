@@ -30,6 +30,127 @@ body {
   color: var(--clr-text);
   scroll-behavior: smooth;
 }
+/* ===============================
+   CLEAN SIDEBAR NAVIGATION
+=============================== */
+
+.nav-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.nav-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: var(--clr-text);
+}
+
+.nav-desktop {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.nav-desktop a {
+  text-decoration: none;
+  color: var(--clr-text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity 0.2s;
+}
+
+.nav-desktop a:hover {
+  opacity: 0.6;
+  color: var(--clr-primary)
+}
+
+/* BURGER BUTTON */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-burger span {
+  width: 26px;
+  height: 3px;
+  background: var(--clr-text);
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+/* MOBILE SIDEBAR PANEL */
+.nav-panel {
+  position: fixed;
+  top: 0;
+  left: -260px; /* hidden start */
+  width: 240px;
+  height: 100vh;
+  background: white;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+  padding: 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  transition: 0.35s ease;
+}
+
+.nav-panel.open {
+  left: 0;
+}
+
+.nav-panel nav a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  padding: 0.3rem;
+}
+
+/* OVERLAY */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.nav-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .nav-burger {
+    display: flex;
+  }
+}
 
 /* =========================================================
    HERO SECTION – Portrait + Gradient
@@ -44,7 +165,7 @@ body {
   position: relative;
   overflow: hidden;
 
-  background: radial-gradient(circle at top left, #64b5f6 0%, #2196f3 38%, #0f172a 100%);
+  background: radial-gradient(circle at top left, #cee9ff 0%, #68b4f3 38%, #303d5a 100%);
 }
 
 #hero::after {
@@ -500,8 +621,8 @@ footer {
   }
 
   .hero-avatar {
-    width: 180px;
-    height: 320px;
+    width: 130px;
+    height: 280px;
   }
 
   .hero-right h1 {

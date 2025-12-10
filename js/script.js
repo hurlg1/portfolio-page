@@ -242,6 +242,30 @@ function renderWeeklyChart(activities, canvas) {
     }
   });
 }
+/* ===============================
+   CLEAN SIDEBAR NAVIGATION
+=============================== */
+
+const burger = document.querySelector(".nav-burger");
+const navPanel = document.getElementById("navPanel");
+const navOverlay = document.getElementById("navOverlay");
+
+burger.addEventListener("click", () => {
+  navPanel.classList.toggle("open");
+  navOverlay.classList.toggle("show");
+});
+
+navOverlay.addEventListener("click", () => {
+  navPanel.classList.remove("open");
+  navOverlay.classList.remove("show");
+});
+
+document.querySelectorAll(".nav-panel a").forEach(link => {
+  link.addEventListener("click", () => {
+    navPanel.classList.remove("open");
+    navOverlay.classList.remove("show");
+  });
+});
 
 /* =========================================================
    BOOTSTRAP

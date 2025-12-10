@@ -8,7 +8,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
+<header class="nav-header">
+  <div class="nav-container">
+    <a href="#hero" class="nav-logo">GIAN-LUCA</a>
 
+    <nav class="nav-desktop">
+      <a href="#hero">Home</a>
+      <a href="#about">Über mich</a>
+      <a href="#skills">Skills</a>
+      <a href="#running">Running</a>
+    </nav>
+
+    <button class="nav-burger" aria-label="Navigation öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- MOBILE PANEL -->
+  <aside class="nav-panel" id="navPanel">
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#about">Über mich</a>
+      <a href="#skills">Skills</a>
+      <a href="#running">Running</a>
+    </nav>
+  </aside>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+</header>
 <body>
 
 <section id="hero">
