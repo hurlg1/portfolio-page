@@ -74,7 +74,7 @@ function formatPace(timeSec, distanceM) {
 }
 
 /* =========================================================
-   LAST UPDATED
+   LAST UPDATED RUNS
 ========================================================= */
 function renderLastUpdated(activities) {
   const el = document.getElementById("run-updated");
