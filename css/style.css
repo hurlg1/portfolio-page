@@ -67,12 +67,12 @@ body {
   gap: 1.6rem;
 }
 
-.nav-desktop a {
+.nav-desktop a,
+.nav-panel a {
+  position: relative;
   text-decoration: none;
   color: var(--clr-text);
   font-weight: 600;
-  font-size: 0.95rem;
-  transition: opacity 0.2s;
 }
 
 /* BURGER BUTTON */
@@ -142,14 +142,6 @@ body {
    NAVIGATION UNDERLINE (HOVER + ACTIVE)
 =============================== */
 
-/* Desktop & Mobile Links */
-.nav-desktop a,
-.nav-panel a {
-  position: relative;
-  color: var(--clr-text);
-  text-decoration: none;
-}
-
 /* UNDERLINE BASIS */
 .nav-desktop a::after,
 .nav-panel a::after {
@@ -165,14 +157,9 @@ body {
   transition: transform 0.25s ease;
 }
 
-/* HOVER → animierte Linie */
 .nav-desktop a:hover::after,
-.nav-panel a:hover::after {
-  transform: scaleX(1);
-}
-
-/* ACTIVE (Scrollspy) → Linie bleibt fix */
 .nav-desktop a.active::after,
+.nav-panel a:hover::after,
 .nav-panel a.active::after {
   transform: scaleX(1);
 }
