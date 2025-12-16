@@ -267,6 +267,52 @@ document.querySelectorAll(".nav-panel a").forEach(link => {
   });
 });
 
+/* ===============================
+   SCROLLSPY (IntersectionObserver) + Click-Active
+=============================== */
+
+const navLinks = document.querySelectorAll(".nav-desktop a, .nav-panel a");
+const sections = [...document.querySelectorAll("section[id]")];
+
+function setActiveById(id) {
+  navLinks.forEach((link) => {
+    link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+  });
+}
+
+// 1) CLICK: sofort aktiv setzen (auch wenn Section klein ist)
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    const href = link.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    const id = href.slice(1);
+    setActiveById(id);
+  });
+});
+
+// 2) OBSERVER: beim Scrollen aktiv setzen
+const observer = new IntersectionObserver(
+  (entries) => {
+    // Nimm die Section, die gerade am "stärksten" sichtbar ist
+    const visible = entries
+      .filter((e) => e.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (visible?.target?.id) {
+      setActiveById(visible.target.id);
+    }
+  },
+  {
+    // wichtig: damit es schon "früh" triggert und auch bei kleinen Sections gut klappt
+    root: null,
+    threshold: [0.15, 0.25, 0.35, 0.5, 0.7],
+    rootMargin: "-25% 0px -55% 0px",
+  }
+);
+
+sections.forEach((sec) => observer.observe(sec));
+
+
 /* =========================================================
    BOOTSTRAP
 ========================================================= */
