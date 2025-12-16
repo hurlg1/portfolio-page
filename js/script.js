@@ -1,48 +1,4 @@
 /* =========================================================
-   HEADER SCROLL BEHAVIOR
-========================================================= */
-const header = document.querySelector(".header");
-let lastScrollY = 0;
-
-window.addEventListener("scroll", () => {
-  const current = window.scrollY;
-
-  if (current > 50) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled", "hide");
-  }
-
-  if (current > lastScrollY && current > 400) {
-    header.classList.add("hide");
-  } else {
-    header.classList.remove("hide");
-  }
-
-  lastScrollY = current;
-});
-
-/* =========================================================
-   LOCAL STORAGE HELPERS
-========================================================= */
-function cacheData(key, fallback) {
-  const cached = localStorage.getItem(key);
-  if (cached) return JSON.parse(cached);
-  localStorage.setItem(key, JSON.stringify(fallback));
-  return fallback;
-}
-
-/* SKILLS ONLY – About bleibt statisch */
-const skillsListEl = document.querySelector("#skills .skills-list");
-
-const skills = cacheData(
-  "skills",
-  [...skillsListEl.querySelectorAll("span")].map(el => el.textContent)
-);
-
-skillsListEl.innerHTML = skills.map(skill => `<span>${skill}</span>`).join("");
-
-/* =========================================================
    STRAVA DATA HANDLING
 ========================================================= */
 async function loadStravaData() {
@@ -245,32 +201,29 @@ function renderWeeklyChart(activities, canvas) {
 /* ===============================
    CLEAN SIDEBAR NAVIGATION
 =============================== */
-
 const burger = document.querySelector(".nav-burger");
 const navPanel = document.getElementById("navPanel");
 const navOverlay = document.getElementById("navOverlay");
+
+function closeNav() {
+  navPanel.classList.remove("open");
+  navOverlay.classList.remove("show");
+}
 
 burger.addEventListener("click", () => {
   navPanel.classList.toggle("open");
   navOverlay.classList.toggle("show");
 });
 
-navOverlay.addEventListener("click", () => {
-  navPanel.classList.remove("open");
-  navOverlay.classList.remove("show");
-});
+navOverlay.addEventListener("click", closeNav);
 
 document.querySelectorAll(".nav-panel a").forEach(link => {
-  link.addEventListener("click", () => {
-    navPanel.classList.remove("open");
-    navOverlay.classList.remove("show");
-  });
+  link.addEventListener("click", closeNav);
 });
 
 /* ===============================
-   SCROLLSPY (IntersectionObserver) + Click-Active
+   SCROLLSPY 
 =============================== */
-
 const navLinks = document.querySelectorAll(".nav-desktop a, .nav-panel a");
 const sections = [...document.querySelectorAll("section[id]")];
 
@@ -280,7 +233,7 @@ function setActiveById(id) {
   });
 }
 
-// 1) CLICK: sofort aktiv setzen (auch wenn Section klein ist)
+// sofort aktiv setzen 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
     const href = link.getAttribute("href");
@@ -290,28 +243,7 @@ navLinks.forEach((link) => {
   });
 });
 
-// 2) OBSERVER: beim Scrollen aktiv setzen
-const observer = new IntersectionObserver(
-  (entries) => {
-    // Nimm die Section, die gerade am "stärksten" sichtbar ist
-    const visible = entries
-      .filter((e) => e.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-    if (visible?.target?.id) {
-      setActiveById(visible.target.id);
-    }
-  },
-  {
-    // wichtig: damit es schon "früh" triggert und auch bei kleinen Sections gut klappt
-    root: null,
-    threshold: [0.15, 0.25, 0.35, 0.5, 0.7],
-    rootMargin: "-25% 0px -55% 0px",
-  }
-);
-
 sections.forEach((sec) => observer.observe(sec));
-
 
 /* =========================================================
    BOOTSTRAP
