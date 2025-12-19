@@ -208,11 +208,13 @@ const navOverlay = document.getElementById("navOverlay");
 function closeNav() {
   navPanel.classList.remove("open");
   navOverlay.classList.remove("show");
+  document.body.classList.remove("nav-open");
 }
 
 burger.addEventListener("click", () => {
   navPanel.classList.toggle("open");
   navOverlay.classList.toggle("show");
+  document.body.classList.toggle("nav-open");
 });
 
 navOverlay.addEventListener("click", closeNav);
@@ -220,6 +222,9 @@ navOverlay.addEventListener("click", closeNav);
 document.querySelectorAll(".nav-panel a").forEach(link => {
   link.addEventListener("click", closeNav);
 });
+
+const navClose = document.querySelector(".nav-close");
+navClose.addEventListener("click", closeNav);
 
 /* ===============================
    SCROLLSPY 

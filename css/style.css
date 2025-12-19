@@ -75,6 +75,18 @@ body {
   font-weight: 600;
 }
 
+.nav-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--clr-text);
+}
+
 /* BURGER BUTTON */
 .nav-burger {
   display: none;
@@ -660,3 +672,7 @@ footer {
   }
 }
 
+body.nav-open {
+  overflow: hidden;
+  touch-action: none;
+}
